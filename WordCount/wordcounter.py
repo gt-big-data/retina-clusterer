@@ -8,4 +8,3 @@ def wordCounter(f):
 			words_read[w] = words_read[w] + 1
 	print(w, words_read)
 # end
-
