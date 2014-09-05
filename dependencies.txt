@@ -1,0 +1,4 @@
+Scikit-learn
+Python (>= 2.6 or >= 3.3)
+NumPy >= 1.6.2
+SciPy >= 0.9
