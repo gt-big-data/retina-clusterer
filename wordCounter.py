@@ -1,19 +1,22 @@
 import os
+import glob
 import operator
+import nltk
 
-os.chdir('C:/Users/svana_000/git/hack-night-1-clusterer/texts')
-filenames = os.listdir('C:/Users/svana_000/git/hack-night-1-clusterer/texts')
 mainDict = {}
-for file in filenames:
-    f = open(file)
+
+os.chdir("texts")
+filelisting = glob.glob("*.txt")
+for filename in filelisting:
+    f = open(filename)
     fileName = f.name
     lines = f.readlines()
     wordDict = {}
     badWords = {}
     for line in lines:
         words = line.split()
-        if words in line:
-            line = line.replaceAll('a', '')
+        # if words in line:
+        #     line = line.replaceAll('a', '')
         
         for word in words:
             try:
