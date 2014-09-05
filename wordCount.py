@@ -20,7 +20,9 @@ for file in filenames:
 
     sorted_list = sorted(wordList.iteritems(), key=operator.itemgetter(1))
     sorted_list.reverse()
-    print(sorted_list)
+    print(file)
+    for entry in sorted_list:
+        print(entry[0] + ' : ' + str(entry[1]))
             
             
     
