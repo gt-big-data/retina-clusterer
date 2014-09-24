@@ -2,40 +2,45 @@ import os
 import glob
 import operator
 import nltk
+from nltk.corpus import stopwords
 
-mainDict = {}
+
+def vectorize(article_dict):
+    types = []
+    [types.extend(article_dict[i].keys()) for i in article_dict]
+    type_set = set(types)
+    vector = {type: 0 for type in type_set}
+    vectorized_articles = {}
+    for article in article_dict:
+        article_vector = vector.copy()
+        for type in article_dict[article]:
+            article_vector[type] = article_dict[article][type]
+        vectorized_articles[article] = article_vector
+    return vectorized_articles
+
 
 os.chdir("texts")
 filelisting = glob.glob("*.txt")
+article_dict = {}
 for filename in filelisting:
     f = open(filename)
     fileName = f.name
-    lines = f.readlines()
     wordDict = {}
-    badWords = {}
-    for line in lines:
+    badWords = set(stopwords.words('english'))
+    for line in f.readlines():
         words = line.split()
-        # if words in line:
-        #     line = line.replaceAll('a', '')
-        
         for word in words:
-            try:
-                wordDict[word] += 1
-            except KeyError:
-                wordDict[word] = 1 
+            if word not in badWords:
+                try:
+                    wordDict[word] += 1
+                except KeyError:
+                    wordDict[word] = 1
+    article_dict[fileName] = wordDict
 
-    sorted_list = sorted(wordDict.items(), key=operator.itemgetter(1))
-    sorted_list.reverse()
-    mainDict[fileName] = sorted_list
-     
-    print(file)
-    for entry in sorted_list:
-        print(entry[0] + ' : ' + str(entry[1]))
-            
-def replaceAll(line, dictionary):
-    for i in dictionary.items():
-        line = line.replace(i, '');
-    return line
-            
-    
+X = vectorize(article_dict)
+import pdb; pdb.set_trace()
+
+
+
+
 
