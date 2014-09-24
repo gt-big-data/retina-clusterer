@@ -1,0 +1,8 @@
+Install NLTK Windows:
+
+Easy way:
+Install Cygwin if you don't have it: (https://www.cygwin.com/)
+Install by downloading get-pip.py on: http://pip.readthedocs.org/en/latest/installing.html
+Then Open cygwin, open the folder where get-pip.py is. Run "python get-pip.py" in cygwin
+
+You're done :)
