@@ -4,10 +4,12 @@ import time
 import hashlib
 from datetime import datetime, timedelta
 
-client = MongoClient('mongodb://localhost:27017/') # for use in localhost
-db = client['BigData'] # for use in localhost
-#client = MongoClient('mongodb://146.148.59.202:27017/')
-#db = client['big_data']
+## ~~~FOR USE IN LOCALHOST ONLY ~~~ :D ##
+#client = MongoClient('mongodb://localhost:27017/')
+#db = client['BigData']
+
+client = MongoClient('mongodb://146.148.59.202:27017/')
+db = client['big_data']
 
 def getCluster(clusterName):
     cluster = db.clusters.find({ "clusterName": clusterName })
