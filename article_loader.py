@@ -1,28 +1,26 @@
 import os
+import json
+from StringIO import StringIO
 """
 loads the text files that have been crawled.
 """
 
-# Waiting for access to the crawled files... till then, let's work on some sample articles:
+LABELS_PATH = 'labels.txt'
 
-current_directory = os.getcwd()
-TEXT_DIR = current_directory + '/texts/'
-
-
-def get_articles(dir_path=TEXT_DIR):
+def get_articles():
     """
     :param dir_path: the directory that contains the articles
-    :return: article strings as list
+    :return: a list of 2-tuples of labeled training data: (article_json, label)
     """
-    sample_articles = os.listdir(dir_path)
     articles = []
-    for article in sample_articles:
-        path = TEXT_DIR + article
-        with open(path, 'r') as f:
-            article_string = f.read()
-            articles.append(article_string)
+    with open(LABELS_PATH, 'r') as f:
+        lines = f.readlines()
+        for line in lines:
+            splits = line.split()
+            filepath, label = splits[0], ' '.join(splits[1:])  # handling labels have spaces within them.
+            with open(filepath, 'r') as sub_file:
+                article_text = json.load(StringIO(sub_file.read()))
+                articles.append((article_text, label))
+
     return articles
-
-
-
 
