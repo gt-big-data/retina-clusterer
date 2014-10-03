@@ -1,3 +1,5 @@
+#This script tries to 
+
 # -*- coding: utf-8 -*-
 import numpy as np
 from sklearn.datasets import fetch_20newsgroups
@@ -6,7 +8,7 @@ from sklearn.naive_bayes import MultinomialNB
 from article_loader import get_articles, get_test_data
 
 
-labeled_data = get_articles();
+labeled_data = get_articles(0);
 labeled_articles = [x[0]['text'] for x in labeled_data]
 labeled_labels = [x[1] for x in labeled_data]
 labels = set([x[1] for x in labeled_data]);
