@@ -20,10 +20,18 @@ def get_articles():
             filepath, label = splits[0], ' '.join(splits[1:])  # handling labels have spaces within them.
             with open('data/labeled/'+filepath, 'r') as sub_file:
                 article_text = json.load(StringIO(sub_file.read()))
-                articles.append((article_text, label))
+                if label != 'Middle East':
+                    articles.append((article_text, label))
 
     return articles
 
-articles = get_articles();
-print(articles[10][0]['text']);
-raw_input('Press enter to exit...')
+def load_test_data():
+    """
+    :param dir_path: the directory that contains the articles
+    :return: a list of article text
+    """
+    articles = []
+    for filename in os.listdir('data/test'):
+        with open('data/test/'+filename, 'r') as f:
+            articles.append([filename, f.read()]);
+    return articles
