@@ -5,7 +5,7 @@ from StringIO import StringIO
 loads the text files that have been crawled.
 """
 
-LABELS_PATH = 'labels.txt'
+LABELS_PATH = 'data/labeled/labels.txt'
 
 def get_articles():
     """
@@ -18,9 +18,12 @@ def get_articles():
         for line in lines:
             splits = line.split()
             filepath, label = splits[0], ' '.join(splits[1:])  # handling labels have spaces within them.
-            with open(filepath, 'r') as sub_file:
+            with open('data/labeled/'+filepath, 'r') as sub_file:
                 article_text = json.load(StringIO(sub_file.read()))
                 articles.append((article_text, label))
 
     return articles
 
+articles = get_articles();
+print(articles[10][0]['text']);
+raw_input('Press enter to exit...')

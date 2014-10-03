@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="9074c252-08c9-4d9a-989d-3ce8efa6934e" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/004b0ffc6360f570894c29302b7de2c8.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/022e02a115e0ac6634ffc26686189ff7.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/028f8d716ed3774e634d68d66758b0fa.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/05d90cf8d2a07c725a82584e9185afb6.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/083dd7dd6bda2dd2c0dcc7ee8ace4030.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/0bbf1e364a7698ea1c868fd13340829b.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/109bac2913865f14d71770e5ecaf23ee.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/10b9bb0155c766fe33aa50cd3c598e9d.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/10c906485f5af6a6427cde8c42f452d7.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/1609b20fe11889c2d18290066cedd020.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/1626d3c948323fafa3045e42afe3ad47.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/17e5772ebe17b75dd8bd59b08c80b227.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/1a89ad5a0bcd57d89683635366ddc2ed.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/1bc0a8f3c6e4b0e25a2baa172412da45.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/1c6389198cd4bd240b22e747e6d231c4.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/204b23a8887d7d0e6d489e6076f733f9.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/21483a1c2465595a25c7bc8a6fefafee.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/227ddb4f111b6c472cf974dfdbb213a2.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/22929d9f66c0c164993418748ad3a5ac.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/2437310cc60068e799895117f2eb6dea.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/2602a7967dc6de1a01c7f77c4cf1668a.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/261a3ede6a6aa6992d4290b4fb48fe97.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/2634f12a9822c780ae0b24efbac115d4.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/274824c37ada56456ebb70f168e4e903.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/28ef07b851098846ef2a23f193d59d37.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/2944c431f0ac39f43eace152ed2eff51.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/29640877987d317527028155390d9235.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/2ad98ff68e1f1d3dad6d0887d11ce3a1.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/2b06fc65559cb7c6dd6e07cd1a59db59.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/2c6bd67f889f368a35f8c958c826bc8c.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/2d546b2c8fa85b1b397e831d1105baa5.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/2f4d978ea7b009da33a46d9275511bbf.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/2fa337b0e1ca05ed7f117918804aa843.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/2fb272951214d9ea4622290967b8ba92.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/329dbc0e86c00929782b72676638026b.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/359c17fc5e6daf8e930943619e4dd5e2.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/39c1273f0da1908365c8787d5298d579.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/3e0f5ecb2511479bee1c84253ad10796.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/3f9eea9667fb898f5e2d3cf61248845c.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/4118bf48dfc3dc40cf886d6aedc24fbe.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/412e14a0cdaa54b5d275f433f6883379.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/431884fa88c401d8b2bf9719ae71d38a.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/447029eeca733e9261ac8aa57b3ac3e3.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/44afdc7de9dd4edaf1e04fc7e9904c15.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/458389599a5981a21f0b47fbe47ceb96.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/46de57d46752011edf9afaa8797eab37.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/4756d3af796aaffb94a37a1ecddcc93c.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/48e4c446d1bf7822174857dc7666c5f2.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/49720e70caf7d548bd0a3d4e94a0632d.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/49bda3b5e826273183c40367d8a3b161.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/49c3aa62a2f610a8c730337fdde047d7.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/4d1d78968fc72ddd96ca421efa15337c.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/4e26dca509543e5c870f4041d1e984ff.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/4ff95835d832cb43deb5b2124abe1b1f.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/509d9281615a4ad69c927f134fae1c76.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/5211dad49ce0e42a045953eee866ba39.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/52fabfa53515d70db8547ece49bb204d.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/550a9969a2882407824b5e42ef62dcc2.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/5852937c2eec23d9324bf211a3a335af.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/5a43d0b6e013b5cd7127238cc1988e6d.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/5c5717100c4440f94cf174b5d86776d6.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/5c575f02af8e67b3dbfd8de9e7a8ec4e.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/5d730ff08d31fb09a8220e326bfba239.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/5d9171acb4bb794534d89c01586d5265.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/5e70bb81a6b5fd74cf7d181e8c45b953.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/630703c3e2c4a6917b09dac40cff1e16.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/6344a6458f037b72182e2ae60bd4026b.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/647516ec19a3a663effae6da8d3e8597.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/64956027b6dda8c53b3a38b093a92b1f.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/6609b4c452f4e7203c723be49b10ee53.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/680d6edc83680302eca2f5069d02e271.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/6b4db5d478dff4d015c48ff4bf467771.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/6cbf2bb3b7deed58af371d88ddb15de1.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/6d9d728166441ccd4e6f8d959f059ca7.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/6ea857c0fc687a109590f5b6671bd120.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/70f4634a6da4b7731886ae0cda87b6c1.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/7137b7bcfff0e9be97ac5f35ba9a8d72.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/720234c515865564ae3d6d57174c7930.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/72e1f13404f060d92bf223e7fd4087d5.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/72e25d099d88ff499012113c3b1c9a19.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/752adf3442bc5f3a267b9a50c8fef08e.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/764973e4db619d3a80f90985f07444b2.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/7873c8a6d0275b7ac962ec0fbf1375c9.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/79572ee32bc9e20f30b6544bf79490dd.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/7d2d0d29ce51b677ce40d44d65fb7cb8.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/7e276111e969a89a30ae4cfabb53a4cf.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/7fe2395aa1d787c392a9e57bb4d110ae.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/80ce78f4e1c2276a151b082ddda45e24.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/80f2f8991b43e5473a63546aacd3bed4.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/8380fc3a85b2cea72cddcce20e1d489c.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/853eeab7b00de0dc1bafb0deb6b9c790.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/87177ae75d219f75d7d791c097ca8275.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/8ec0bd9ab6be103e0bd138c603c3e32d.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/8f83e6cbf8228a1f09e4d85073fa2d8c.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/8fe0c21c91e000be8c850fd33c08c315.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/93792a980d7613634e83cc4c03f8c6e3.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/93f81562ff958b24d51ea3285664c0a8.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/93faddf2c3a95e479fc995ac7b84676d.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/97f4ac94c8d84bf21ca63502169fd77a.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/9b199d05450a81cc9a7fea63c9d05f35.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/9b5e6202922e5848b5dc47b4da2b98fa.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/9cc7179ddf4168ed847cd05e6e810b0b.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/9e170b4cb6174ef1813d7a0837e3af77.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/9eb730567defa60c6f513a148c4608be.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/9fc83f850edf2c76ba9c81a93e695519.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/test/NFL-49ers.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/a1fd14e39114ec48e1d187cd82e6b992.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/a2226483ac8b5368f1bb0c926739d0df.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/a2ec98918e77aa3bbe1b31a69691943e.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/a578374c6ad492492002032ca9e562b6.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/a5a02e2d76dd0d9350db7f6fba5406a3.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/a6386d9d53e50e9ce217de02f144263f.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/a8da9d334e02a392534235bea304528b.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/a905c404282f100c7ea1fd40da4706da.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/aafbe5ce9506823510a58eef81bfb4af.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/acefadd704dea17d9b2761ea5e241351.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/ad4d54db03fe17b86d5c9c1a220c11b3.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/ae17443702da77d2220b363384736731.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/b15181eb671e28b5d367300e866cee88.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/b37bfcccfa3a16c54f4790dfe9bf7a69.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/b595699ac39b21aa05f7692a78274801.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/b7130138e326e8c126c574e40aaba70c.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/b82245a530173f2f3d9f132ee05f8de1.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/ba11a9898970a8f0e22c54b4b56b9a80.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/bab82ca3b37b96daf297ff9c290bb585.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/bb89dd4c160416d9d5a20f35a6af6769.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/bcb86fe874194122f575afb55cbaa6ae.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/bee9021308325ced48723cfcafeadc17.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/bef26607082439558f662c1988cc0c47.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/c229cd37b0a5b01120b9c1c964fb730b.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/c2bd69ee7d380e478a0eab881406977d.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/cb408f3e1334fb86f689658b83118fe0.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/cb6ef26f355aeea691315ce336ab3c0c.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/cd72a71a2beacb658850fe0401aace54.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/cf6bb38c78bb3b401a459a8053cde36d.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/d0fbda9855d118740f1105334305c126.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/d15312284169b6f22d7968bcddef9d76.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/d1ab6a31a6bcbf6bee64001bae0b8b25.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/d217a7f00798f28e5981952bb4e5d456.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/d282bdea0849d56b2c973e57b72e3277.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/d41d8cd98f00b204e9800998ecf8427e.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/d4fe9bedab96def64510653d32d5b0ed.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/d781615683e2ae51f1f15b21487e918d.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/d7c0d98b14f40bb7b21ab546c59415d9.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/d814ecd4c6ec34fd57e652aeaca34d0f.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/da1cf03a10d07b74e0643eb89efeac1b.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/da59fb1e1ffd069406827e75bdbe724f.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/dc990239dd9244d912fd013767c9a2b5.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/dda2dd840ed813c8fa00468c7b883dfe.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/defb7dd80fee8474191168a416eb29c7.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/dfcedc624e126edcd87535f9e4ea0cd4.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/dfd6abfadacf16b0e14f4e5a25433751.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/e3594ce9097e067a92ffb77f40e44b47.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/e831c9345c4310423436ea1787ea8e59.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/e87885e20087606704f1ad0a8a47339e.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/e8f526bbd4b61911fa0620631c87824f.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/e930b10d00c9428d43ceeed67289683d.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/ecf4658a6fae6168d94e6ce16a4ab638.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/ee5e2a7a5fc922c8e37a999c47b596f6.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/ee68f7a7fa7a6bfb43facbbdcc45690d.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/ee9a5d686744ab80665d4d7ca38edb04.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/f21364c9011e664c77aa7101970aa5e6.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/f23a36c4490669c1b0b2054c364605b1.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/f245a77f0c0a1378bde5f7930bc2e0a3.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/f2f407f28ed3d49769858ebd8629f281.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/f3a34a2e8094394030993eb675bbddef.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/f4dad94fbd65a69e640e2b09f887fd86.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/f5d536a2ca5bef9d26d046b5096caa9c.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/f614efb9bd7526b242c6efbd4a5bf8e9.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/f75185f731bd4832242c516abd48ce17.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/raw/fb1ed0c4a77bc49ec8f62b9c3a4e10d3.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/label.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labeled/labels.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/test/rand-paul-elections.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/test/travel-train-station.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/test/turkish-syrian-border.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/app.py" afterPath="$PROJECT_DIR$/db/app.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/article_loader.py" afterPath="$PROJECT_DIR$/article_loader.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/topic_modeling_nmf_test.py" afterPath="$PROJECT_DIR$/topic_modeling_nmf_test.py" />
+    </list>
+    <ignored path="retina-clusterer.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DaemonCodeAnalyzer">
+    <disable_hints />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="retina-clusterer" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="article_loader.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/article_loader.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="510">
+              <caret line="27" column="19" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="classification.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/classification.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.025110783" vertical-offset="88" max-vertical-offset="825">
+              <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="labels.txt" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/labels.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2055">
+              <caret line="0" column="4" selection-start-line="0" selection-start-column="4" selection-end-line="0" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindManager">
+    <FindUsagesManager>
+      <setting name="OPEN_NEW_TAB" value="true" />
+    </FindUsagesManager>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="changedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/topic_modeling_nmf_test.py" />
+        <option value="$PROJECT_DIR$/article_loader.py" />
+        <option value="$PROJECT_DIR$/classification.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="y" value="22" />
+    <option name="width" value="1280" />
+    <option name="height" value="774" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectReloadState">
+    <option name="STATE" value="0" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="retina-clusterer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="retina-clusterer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="retina-clusterer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="FullScreen" value="false" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="tests" factoryName="py.test">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="retina-clusterer" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="testToRun" value="" />
+      <option name="keywords" value="" />
+      <option name="params" value="" />
+      <option name="USE_PARAM" value="false" />
+      <option name="USE_KEYWORD" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Nosetests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="retina-clusterer" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="retina-clusterer" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Unittests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="retina-clusterer" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PUREUNITTEST" value="true" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Doctests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="retina-clusterer" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Attests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="retina-clusterer" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method />
+    </configuration>
+    <list size="0" />
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9074c252-08c9-4d9a-989d-3ce8efa6934e" name="Default" comment="" />
+      <created>1411587407897</created>
+      <updated>1411587407897</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="22" width="1280" height="774" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24921875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+    </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="myTodoPanelSettings">
+      <TodoPanelSettings />
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/topic_modeling_nmf_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.22758621" vertical-offset="0" max-vertical-offset="725">
+          <caret line="11" column="50" selection-start-line="11" selection-start-column="50" selection-end-line="11" selection-end-column="50" />
+          <folding>
+            <element signature="e#0#39#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/raw/1bc0a8f3c6e4b0e25a2baa172412da45.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2865">
+          <caret line="11" column="42" selection-start-line="11" selection-start-column="42" selection-end-line="11" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/raw/0bbf1e364a7698ea1c868fd13340829b.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1005">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/labels.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2055">
+          <caret line="0" column="4" selection-start-line="0" selection-start-column="4" selection-end-line="0" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.22156574" vertical-offset="0" max-vertical-offset="677">
+          <caret line="10" column="28" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#31#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/article_loader.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="510">
+          <caret line="27" column="19" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/classification.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.025110783" vertical-offset="88" max-vertical-offset="825">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
+
