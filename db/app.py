@@ -2,11 +2,12 @@ from pymongo import MongoClient
 from bson.objectid import ObjectId
 import time
 import hashlib
+import md5
 from datetime import datetime, timedelta
 
-## ~~~FOR USE IN LOCALHOST ONLY ~~~ :D ##
+## ~~~FOR USE IN LOCALHOST ONLY~~~ :D ##
 #client = MongoClient('mongodb://localhost:27017/')
-#db = client['BigData']
+#db = client['big_data']
 
 client = MongoClient('mongodb://146.148.59.202:27017/')
 db = client['big_data']
@@ -43,3 +44,19 @@ def getArticlesByTimeStamp(timeStamp):
         returnObject['articleArray'].append(article)
 
     return returnObject
+
+def getArticleClusterList():
+    articles = db.clusters.distinct('clusterName')
+    clusterNameArray = []
+
+    for article in articles:
+        clusterNameArray.append(article)
+
+    return clusterNameArray
+
+def createCluster(clusterName, objectID):
+    # objectID is an array
+    db.clusters.insert( { "clusterName": clusterName, "_id": hashlib.md5(clusterName).hexdigest(), "objectIDs": objectID } )
+
+def deleteCluster(clusterName):
+    db.clusters.remove( { "clusterName": clusterName })
