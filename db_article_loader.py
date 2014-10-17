@@ -15,5 +15,3 @@ def db_get_articles(ts=1):
 	for article in articles['articleArray']:
 		articles_returned.append((article['title'], article['text'], article['categories']));
 	return articles_returned
-	# for article in articles['articleArray']:
-	# 	print str(article['download_date'])+'\n';
