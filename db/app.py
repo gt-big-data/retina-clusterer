@@ -34,10 +34,8 @@ def getCluster(clusterName):
     }
 
 def getArticlesByTimeStamp(timeStamp):
-    articles = db.articles.find({ "timestamp": { "$gte": timeStamp } })
-    returnObject = {
-        "articleArray": []
-    }
+    articles = db.articles.find({'$and': [{ "download_date": {"$gte": timeStamp }}, {"v": "0.0.1"}, {"text": {'$ne': ''}}, {"title": {'$ne': ''}}, {"categories": {'$ne': []}}]});
+    returnObject = {"articleArray": []}
 
     for article in articles:
         returnObject['articleArray'].append(article)
