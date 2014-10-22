@@ -35,7 +35,7 @@ def getCluster(clusterName):
     }
 
 def getArticlesByTimeStamp(timeStamp):
-    articles = db.articles.find({'$and': [{ "download_date": {"$gte": timeStamp }}, {"v": "0.0.1"}, {"text": {'$ne': ''}}, {"title": {'$ne': ''}}, {"categories": {'$ne': []}}]});
+    articles = db.articles.find({'$and': [{ "download_date": {"$gte": timeStamp }}, {"v": "0.0.1"}, {"text": {'$ne': ''}}, {"title": {'$ne': ''}}, {"categories": {'$ne': [], '$ne': None}}]});
     returnObject = {"articleArray": []}
 
     for article in articles:
@@ -58,7 +58,3 @@ def createCluster(clusterName, objectID):
 
 def deleteCluster(clusterName):
     db.clusters.remove( { "clusterName": clusterName })
-
-def insertArticles(articleIDs, clusterName):
-    # articleIDs is an array
-    db.clusters.insert( { "clusterName": clusterName }, { "$push": { objectIDs: articleIDs } } )
