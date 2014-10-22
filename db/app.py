@@ -6,11 +6,11 @@ import md5
 from datetime import datetime, timedelta
 
 ## ~~~FOR USE IN LOCALHOST ONLY~~~ :D ##
-#client = MongoClient('mongodb://localhost:27017/')
-#db = client['big_data']
+client = MongoClient('mongodb://localhost:27017/')
+db = client['BigData']
 
-client = MongoClient('mongodb://146.148.59.202:27017/')
-db = client['big_data']
+# client = MongoClient('mongodb://146.148.59.202:27017/')
+# db = client['big_data']
 
 def getCluster(clusterName):
     cluster = db.clusters.find({ "clusterName": clusterName })
@@ -63,4 +63,4 @@ def deleteCluster(clusterName):
 
 def insertArticles(articleIDs, clusterName):
     # articleIDs is an array
-    db.clusters.insert( { "clusterName": clusterName }, { "$push": { objectIDs: articleIDs } } )
+    db.clusters.update( { "clusterName": clusterName }, { "$push": { "articles": articleIDs } } )
