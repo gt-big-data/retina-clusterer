@@ -15,3 +15,8 @@ def db_get_articles(ts=1):
 	for article in articles['articleArray']:
 		articles_returned.append((article['title'], article['text'], article['categories']));
 	return articles_returned
+
+def db_get_articles_with_categories():
+	print len(db_get_articles(1))
+	
+db_get_articles_with_categories()
