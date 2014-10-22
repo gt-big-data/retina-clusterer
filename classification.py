@@ -41,9 +41,7 @@ def vectorize(article_texts):
 
 
 # Testing:
-articles_labels = get_articles()
-articles = [article[0]['text'] for article in articles_labels]
-labels = [article[1] for article in articles_labels]
-print vectorize(articles)
-
-
+# articles_labels = get_articles()
+# articles = [article[0]['text'] for article in articles_labels]
+# labels = [article[1] for article in articles_labels]
+# print vectorize(articles)
