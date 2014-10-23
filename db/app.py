@@ -6,8 +6,8 @@ import md5
 from datetime import datetime, timedelta
 
 ## ~~~FOR USE IN LOCALHOST ONLY~~~ :D ##
-#client = MongoClient('mongodb://localhost:27017/')
-#db = client['big_data']
+# client = MongoClient('mongodb://localhost:27017/')
+# db = client['BigData']
 
 client = MongoClient('mongodb://146.148.59.202:27017/')
 db = client['big_data']
@@ -34,8 +34,17 @@ def getCluster(clusterName):
         "features": cluster[0][u'features'],
     }
 
-def getArticlesByTimeStamp(timeStamp):
+def getPopulatedArticlesByTimeStamp(timeStamp):
     articles = db.articles.find({'$and': [{ "download_date": {"$gte": timeStamp }}, {"v": "0.0.1"}, {"text": {'$ne': ''}}, {"title": {'$ne': ''}}, {"categories": {'$ne': [], '$ne': None}}]});
+    returnObject = {"articleArray": []}
+
+    for article in articles:
+        returnObject['articleArray'].append(article)
+
+    return returnObject
+
+def getAllArticlesByTimeStamp(timeStamp):
+    articles = db.articles.find({ "download_date": {"$gte": timeStamp }})
     returnObject = {"articleArray": []}
 
     for article in articles:
@@ -58,3 +67,7 @@ def createCluster(clusterName, objectID):
 
 def deleteCluster(clusterName):
     db.clusters.remove( { "clusterName": clusterName })
+
+def insertArticles(articleIDs, clusterName):
+    # articleIDs is an array
+    db.clusters.update( { "clusterName": clusterName }, { "$push": { "articles": articleIDs } } )
