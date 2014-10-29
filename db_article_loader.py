@@ -21,6 +21,12 @@ def db_get_populated_articles_count(ts=1):
 	"""
 	return app.getPopulatedArticlesCount(ts)
 
+def db_get_all_articles_count(ts=1):
+	"""
+	Counts the number of useful articles (most recent version, populated articles)
+	"""
+	return app.getAllArticlesCount(ts)
+
 def db_get_all_articles(ts=1):
 	"""
 	Connects to the database, pulls up ALL entries found in the database
@@ -46,4 +52,3 @@ def db_get_all_articles(ts=1):
 		
 		articles_returned.append((title, text, categories))
 	return articles_returned
-print db_get_populated_articles_count()
