@@ -23,7 +23,7 @@ def db_get_populated_articles_count(ts=1):
 
 def db_get_all_articles_count(ts=1):
 	"""
-	Counts the number of useful articles (most recent version, populated articles)
+	Counts the number of articles (or entries) in the database
 	"""
 	return app.getAllArticlesCount(ts)
 
@@ -52,3 +52,10 @@ def db_get_all_articles(ts=1):
 		
 		articles_returned.append((title, text, categories))
 	return articles_returned
+
+articles = db_get_populated_articles(limit=10000)
+count = 0
+for article in articles:
+	if (article[0] == None):
+		count = count + 1
+print count

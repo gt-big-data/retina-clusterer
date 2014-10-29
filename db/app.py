@@ -57,7 +57,7 @@ def getPopulatedArticlesCount(timeStamp):
     return count
 
 def getAllArticlesCount(timestamp):
-    count = db.articles.find().count()
+    count = db.articles.count()
     return count
 
 def getArticleClusterList():
