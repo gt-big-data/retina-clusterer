@@ -2,15 +2,15 @@ import time
 from db import app
 from StringIO import StringIO
 
-def db_get_populated_articles(ts=1):
+def db_get_populated_articles(ts=1, limit=10000):
 	"""
 	Connects to the database, pulls up the recent version of articles puts them in a list where:
 	articles[i][0] = Title of article
 	articles[i][1] = Text in article
 	articles[i][2] = Category list
 	"""
-	articles = app.getPopulatedArticlesByTimeStamp(ts)
-	articles_returned = []
+	articles = app.getPopulatedArticlesByTimeStamp(ts,limit);
+	articles_returned = [];
 	for article in articles['articleArray']:
 		articles_returned.append((article['title'], article['text'], article['categories']))
 	return articles_returned

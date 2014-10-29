@@ -34,10 +34,10 @@ def getCluster(clusterName):
         "features": cluster[0][u'features'],
     }
 
-def getPopulatedArticlesByTimeStamp(timeStamp):
-    articles = db.articles.find({'$and': [{ "download_date": {"$gte": timeStamp }}, {"v": "0.0.1"}, {"text": {'$ne': ''}}, {"title": {'$ne': ''}}, {"categories": {'$ne': [], '$ne': None}}]});
+def getPopulatedArticlesByTimeStamp(timeStamp, limit):
+    #"download_date": {"$gte": timeStamp }
+    articles = db.articles.find({'$and': [{"v": "0.0.5"}, {"text": {'$ne': ''}}, {"title": {'$ne': ''}}, {"categories": {'$ne': [], '$ne': None}}]}).limit(limit);
     returnObject = {"articleArray": []}
-
     for article in articles:
         returnObject['articleArray'].append(article)
 
