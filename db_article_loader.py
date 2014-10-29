@@ -4,7 +4,7 @@ from StringIO import StringIO
 
 def db_get_populated_articles(ts=1):
 	"""
-	Connects to the database, pulls up articles puts them in a list where:
+	Connects to the database, pulls up the recent version of articles puts them in a list where:
 	articles[i][0] = Title of article
 	articles[i][1] = Text in article
 	articles[i][2] = Category list
@@ -15,6 +15,11 @@ def db_get_populated_articles(ts=1):
 		articles_returned.append((article['title'], article['text'], article['categories']))
 	return articles_returned
 
+def db_get_populated_articles_count(ts=1):
+	"""
+	Counts the number of useful articles (most recent version, populated articles)
+	"""
+	return app.getPopulatedArticlesCount(ts)
 
 def db_get_all_articles(ts=1):
 	"""
@@ -41,3 +46,4 @@ def db_get_all_articles(ts=1):
 		
 		articles_returned.append((title, text, categories))
 	return articles_returned
+print db_get_populated_articles_count()
