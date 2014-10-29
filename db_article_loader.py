@@ -15,14 +15,6 @@ def db_get_populated_articles(ts=1):
 		articles_returned.append((article['title'], article['text'], article['categories']))
 	return articles_returned
 
-def db_get_article_count(ts=1):
-	"""
-	Gets the number of entries in the database
-	May later be changed to count of full article entries
-	Early entries are not fully populated
-	"""
-	articles = app.getPopulatedArticlesByTimeStamp(ts)
-	return len(articles['articleArray'])
 
 def db_get_all_articles(ts=1):
 	"""
@@ -48,4 +40,4 @@ def db_get_all_articles(ts=1):
 			categories = article['categories']
 		
 		articles_returned.append((title, text, categories))
-	return articles_returned	
+	return articles_returned
