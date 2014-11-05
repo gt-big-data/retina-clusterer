@@ -58,4 +58,3 @@ count = 0
 for article in articles:
 	if (article[0] == None):
 		count = count + 1
-print count
