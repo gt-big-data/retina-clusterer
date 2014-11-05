@@ -52,10 +52,3 @@ def db_get_all_articles(ts=1):
 		
 		articles_returned.append((title, text, categories))
 	return articles_returned
-
-articles = db_get_populated_articles(limit=10000)
-count = 0
-for article in articles:
-	if (article[0] == None):
-		count = count + 1
-print count

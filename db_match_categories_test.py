@@ -17,7 +17,7 @@ timestamp = time.time(); timestamp = timestamp - 100*24*60*60;
 # train_data = get_articles(1);
 # train_articles = [x[0]['text'] for x in train_data]
 # train_labels = [x[1] for x in train_data] #labels = set(label_labels);
-train_data = db_get_populated_articles(timestamp);
+train_data = db_get_populated_articles(timestamp, 1000);
 train_articles = [x[1] for x in train_data];
 train_labels = [x[2][0] for x in train_data]
 

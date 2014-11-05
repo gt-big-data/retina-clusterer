@@ -36,7 +36,7 @@ def getCluster(clusterName):
 
 def getPopulatedArticlesByTimeStamp(timeStamp, limit):
     #"download_date": {"$gte": timeStamp }
-    articles = db.articles.find({'$and': [{"v": "0.0.5"}, {"text": {'$ne': ''}}, {"title": {'$ne': ''}}, {"categories": {'$ne': [], '$ne': None}}]}).limit(limit);
+    articles = db.articles.find({'$and': [{"v": "0.0.6"}, {"text": {'$ne': ''}}, {"title": {'$ne': ''}}, {"categories": {'$ne': [], '$ne': None}}]}).limit(limit);
     returnObject = {"articleArray": []}
     for article in articles:
         returnObject['articleArray'].append(article)
@@ -53,7 +53,7 @@ def getAllArticlesByTimeStamp(timeStamp):
     return returnObject
 
 def getPopulatedArticlesCount(timeStamp):
-    count = db.articles.find({'$and': [{"v": "0.0.5"}, {"text": {'$ne': ''}}, {"title": {'$ne': ''}}, {"categories": {'$ne': [], '$ne': None}}]}).count()
+    count = db.articles.find({'$and': [{"v": "0.0.6"}, {"text": {'$ne': ''}}, {"title": {'$ne': ''}}, {"categories": {'$ne': [], '$ne': None}}]}).count()
     return count
 
 def getAllArticlesCount(timestamp):
