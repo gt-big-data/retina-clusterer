@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import time
 import numpy as np
-from db_article_loader import db_get_populated_articles
+from db_article_loader import db_get_unique_categories
 from classification import vectorize
 from classification import cross_validation
 from sklearn.datasets import fetch_20newsgroups
@@ -10,13 +10,6 @@ from sklearn.naive_bayes import MultinomialNB
 from article_loader import get_articles, get_test_data
 
 timestamp = time.time(); timestamp = timestamp - 100*24*60*60;
-test_data = db_get_populated_articles(timestamp, 1000);
+unique_cat = db_get_unique_categories(timestamp);
 
-test_articles = [x[1] for x in test_data];
-test_labels = [x[2][0] for x in test_data];
-
-test_tfidf, vectorizer = vectorize(test_articles);
-
-clf = MultinomialNB();
-
-print "Succes: ", cross_validation(clf, test_tfidf, test_labels, 5);
+print "Nb cat: ", len(unique_cat) ,"\n Succes: ", unique_cat;

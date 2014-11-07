@@ -6,7 +6,6 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from nltk.stem.porter import PorterStemmer
 import numpy as np
 
-from article_loader import get_articles
 """
 Supervised Learning:
 - Testing with 10 fold cross-validation:

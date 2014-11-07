@@ -21,34 +21,14 @@ def db_get_populated_articles_count(ts=1):
 	"""
 	return app.getPopulatedArticlesCount(ts)
 
-def db_get_all_articles_count(ts=1):
-	"""
-	Counts the number of articles (or entries) in the database
-	"""
-	return app.getAllArticlesCount(ts)
 
-def db_get_all_articles(ts=1):
+def db_get_unique_categories(ts=1):
 	"""
-	Connects to the database, pulls up ALL entries found in the database
-	If present (None if not present):
-	articles[i][0] = Title of article
-	articles[i][1] = Text in article
-	articles[i][2] = Category list
+	Returns a list of unique categories in the DB
 	"""
-	articles = app.getAllArticlesByTimeStamp(ts)
-
-	articles_returned = []
+	listCat = set([]);
+	articles = app.getPopulatedArticlesByTimeStamp(ts,1000)
 	for article in articles['articleArray']:
+		listCat.add(article['categories'][0]);
 
-		title = None
-		text = None
-		categories = None
-		if ("title" in article.keys()):
-			title = article['title']
-		if ("text" in article.keys()):
-			text = article['text']
-		if ("categories" in article.keys()):
-			categories = article['categories']
-		
-		articles_returned.append((title, text, categories))
-	return articles_returned
+	return listCat;
