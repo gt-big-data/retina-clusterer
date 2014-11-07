@@ -21,11 +21,9 @@ def getPopulatedArticlesByTimeStamp(timeStamp, limit):
 
     return returnObject
 
-
 def getPopulatedArticlesCount(timeStamp):
     count = db.articles.find({'$and': [{"v": "0.0.6"}, {"text": {'$ne': ''}}, {"title": {'$ne': ''}}, {"categories": {'$ne': [], '$ne': None}}]}).count()
     return count
-
 
 # The next functions are for clusters
 def getArticleClusterList():
@@ -43,7 +41,7 @@ def createCluster(clusterName, objectID):    # objectID is an array
 def deleteCluster(clusterName):
     db.clusters.remove( { "clusterName": clusterName })
 
-def insertToCluster(articleIDs, clusterName): # articleIDs is an array
+def insertToCluster(clusterName, articleIDs): # articleIDs is an array
     db.clusters.update( { "clusterName": clusterName }, { "$push": { "articles": articleIDs } } )
 
 def getCluster(clusterName):
@@ -67,3 +65,5 @@ def getCluster(clusterName):
         "_id": cluster[0][u'_id'],
         "features": cluster[0][u'features'],
     }
+def getClusterArticleCount(clusterName):
+    return db.clusters.find({ "clusterName": clusterName }).count();

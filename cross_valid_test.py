@@ -6,7 +6,6 @@ from classification import vectorize
 from classification import cross_validation
 from sklearn.datasets import fetch_20newsgroups
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
-from article_loader import get_articles, get_test_data
 
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.neighbors import KNeighborsClassifier
