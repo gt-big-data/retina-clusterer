@@ -6,13 +6,8 @@ import md5
 from datetime import datetime, timedelta
 
 ## ~~~FOR USE IN LOCALHOST ONLY~~~ :D ##
-<<<<<<< HEAD
-#client = MongoClient('mongodb://localhost:27017/')
-#db = client['BigData']
-=======
 # client = MongoClient('mongodb://localhost:27017/')
 # db = client['BigData']
->>>>>>> ae0896c5bebd76fe35230a90e725e09e7dd81bc3
 
 client = MongoClient('mongodb://146.148.59.202:27017/')
 db = client['big_data']
@@ -40,15 +35,6 @@ def getArticleClusterList():
 
     return clusterNameArray
 
-def createCluster(clusterName, objectID):    # objectID is an array
-    db.clusters.insert( { "clusterName": clusterName, "_id": hashlib.md5(clusterName).hexdigest(), "objectIDs": objectID } )
-
-def deleteCluster(clusterName):
-    db.clusters.remove( { "clusterName": clusterName })
-
-def insertToCluster(clusterName, articleIDs): # articleIDs is an array
-    db.clusters.update( { "clusterName": clusterName }, { "$push": { "articles": articleIDs } } )
-
 def getCluster(clusterName):
     cluster = db.clusters.find({ "clusterName": clusterName })
 
@@ -70,7 +56,6 @@ def getCluster(clusterName):
         "_id": cluster[0][u'_id'],
         "features": cluster[0][u'features'],
     }
-<<<<<<< HEAD
 
 def getArticlesByTimeStamp(timeStamp):
     articles = db.articles.find({ "timestamp": { "$gte": timeStamp } })
@@ -99,13 +84,12 @@ def createCluster(clusterName, objectID):
 def deleteCluster(clusterName):
     db.clusters.remove( { "clusterName": clusterName })
 
-def insertArticles(articleIDs, clusterName):
+def insertToCluster(articleIDs, clusterName):
     # articleIDs is an array
     db.clusters.update( { "clusterName": clusterName }, { "$push": { "articles": articleIDs } } )
 
-def deleteArticles(articleIDs, clusterName):
+def deleteFromCluster(articleIDs, clusterName):
     db.clusters.update( { "clusterName": clusterName }, { "$pull": { "articles": articleIDs } } )
-=======
+
 def getClusterArticleCount(clusterName):
     return db.clusters.find({ "clusterName": clusterName }).count();
->>>>>>> ae0896c5bebd76fe35230a90e725e09e7dd81bc3
