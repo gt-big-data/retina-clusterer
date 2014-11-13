@@ -3,9 +3,9 @@
 
 def cluster_name(clus):
 	clus = clus.lower();
-	if(clus == 'politics' || ):
+	if(clus == 'politics'):
 		return 'Politics';
-	elseif(clus == 'sport' || clus == 'sports' || clus == 'worldsport'):
+	if(clus == 'sport' || clus == 'sports' || clus == 'worldsport'):
 		return 'Sports';
 	if(clus == 'technology' || clus == 'tech'):
 		return 'Technology';
