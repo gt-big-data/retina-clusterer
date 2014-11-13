@@ -13,8 +13,8 @@ client = MongoClient('mongodb://146.148.59.202:27017/')
 db = client['big_data']
 
 def getPopulatedArticlesByTimeStamp(timeStamp, limit):
-    #, {"recent_pub_date": {"$gte": timeStamp }}
-    articles = db.articles.find({'$and': [{"v": "0.0.6"}, {"text": {'$ne': ''}}, {"title": {'$ne': ''}}, {"categories": {'$ne': [], '$ne': None}}]}).limit(limit);
+    timeObj = datetime.utcfromtimestamp(timeStamp);
+    articles = db.articles.find({'$and': [{"v": "0.0.6"}, {"text": {'$ne': ''}}, {"title": {'$ne': ''}}, {"categories": {'$ne': [], '$ne': None}}, {"recent_pub_date": {"$gte":  timeObj}}]}).limit(limit);
     returnObject = {"articleArray": []}
     for article in articles:
         returnObject['articleArray'].append(article)
@@ -22,7 +22,8 @@ def getPopulatedArticlesByTimeStamp(timeStamp, limit):
     return returnObject
 
 def getPopulatedArticlesCount(timeStamp):
-    count = db.articles.find({'$and': [{"v": "0.0.6"}, {"text": {'$ne': ''}}, {"title": {'$ne': ''}}, {"categories": {'$ne': [], '$ne': None}}]}).count()
+    timeObj = datetime.utcfromtimestamp(timeStamp);
+    count = db.articles.find({'$and': [{"v": "0.0.6"}, {"text": {'$ne': ''}}, {"title": {'$ne': ''}}, {"categories": {'$ne': [], '$ne': None}}, {"recent_pub_date": {"$gte":  timeObj}}]}).count()
     return count
 
 # The next functions are for clusters
