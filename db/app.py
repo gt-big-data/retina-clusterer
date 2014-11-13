@@ -68,15 +68,6 @@ def getArticlesByTimeStamp(timeStamp):
 
     return returnObject
 
-def getArticleClusterList():
-    articles = db.clusters.distinct('clusterName')
-    clusterNameArray = []
-
-    for article in articles:
-        clusterNameArray.append(article)
-
-    return clusterNameArray
-
 def createCluster(clusterName, objectID):
     # objectID is an array
     db.clusters.insert( { "clusterName": clusterName, "_id": hashlib.md5(clusterName).hexdigest(), "objectIDs": objectID } )
