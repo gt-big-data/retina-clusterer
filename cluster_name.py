@@ -5,9 +5,9 @@ def cluster_name(clus):
 	clus = clus.lower();
 	if(clus == 'politics'):
 		return 'Politics';
-	if(clus == 'sport' || clus == 'sports' || clus == 'worldsport'):
+	if(clus == 'sport' or clus == 'sports' or clus == 'worldsport'):
 		return 'Sports';
-	if(clus == 'technology' || clus == 'tech'):
+	if(clus == 'technology' or clus == 'tech'):
 		return 'Technology';
 	if(clus == 'arts'):
 		return 'Arts';
@@ -21,9 +21,9 @@ def cluster_name(clus):
 		return 'Health';
 	if(clus == 'business'):
 		return 'Business';
-	if(clus == 'asia' || clus == 'world'):
+	if(clus == 'asia' or clus == 'world'):
 		return 'World';
-	if(clus == 'showbiz' || clus == 'theater'):
+	if(clus == 'showbiz' or clus == 'theater'):
 		return 'Theater';
 	if(clus == 'science'):
 		return 'Science';
@@ -31,6 +31,6 @@ def cluster_name(clus):
 		return 'US';
 	if(clus == 'movies'):
 		return 'Movies';
-	if(clus == 'books' || clus == 'living' || clus == 'nyregion' || clus == 'magazine' || clus == 'opinion'):
+	if(clus == 'books' or clus == 'living' or clus == 'nyregion' or clus == 'magazine' or clus == 'opinion'):
 		return 'Opinion';
 	return '';
