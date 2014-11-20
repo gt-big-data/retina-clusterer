@@ -14,7 +14,7 @@ db = client['big_data']
 
 def getPopulatedArticlesByTimeStamp(timeStamp, limit):
     timeObj = datetime.utcfromtimestamp(timeStamp);
-    articles = db.articles.find({'$and': [{"v": "0.0.6"}, {"text": {'$ne': ''}}, {"title": {'$ne': ''}}, {"categories": {'$ne': [], '$ne': None}}, {"recent_pub_date": {"$gte":  timeObj}}]}).limit(limit);
+    articles = db.articles.find({'$and': [{"v": "0.0.7"}, {"text": {'$ne': ''}}, {"title": {'$ne': ''}}, {"categories": {'$ne': [], '$ne': None}}, {"recent_pub_date": {"$gte":  timeObj}}]}).limit(limit);
     returnObject = {"articleArray": []}
     for article in articles:
         returnObject['articleArray'].append(article)
@@ -23,7 +23,7 @@ def getPopulatedArticlesByTimeStamp(timeStamp, limit):
 
 def getPopulatedArticlesCount(timeStamp):
     timeObj = datetime.utcfromtimestamp(timeStamp);
-    count = db.articles.find({'$and': [{"v": "0.0.6"}, {"text": {'$ne': ''}}, {"title": {'$ne': ''}}, {"categories": {'$ne': [], '$ne': None}}, {"recent_pub_date": {"$gte":  timeObj}}]}).count()
+    count = db.articles.find({'$and': [{"v": "0.0.7"}, {"text": {'$ne': ''}}, {"title": {'$ne': ''}}, {"categories": {'$ne': [], '$ne': None}}, {"recent_pub_date": {"$gte":  timeObj}}]}).count()
     return count
 
 # The next functions are for clusters
@@ -58,16 +58,6 @@ def getCluster(clusterName):
         "features": cluster[0][u'features'],
     }
 
-def getArticlesByTimeStamp(timeStamp):
-    articles = db.articles.find({ "timestamp": { "$gte": timeStamp } })
-    returnObject = {
-        "articleArray": []
-    }
-
-    for article in articles:
-        returnObject['articleArray'].append(article)
-
-    return returnObject
 
 def createCluster(clusterName, objectID):
     # objectID is an array
