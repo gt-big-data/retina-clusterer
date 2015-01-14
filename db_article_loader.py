@@ -1,6 +1,9 @@
 import time
 from db import app
 from StringIO import StringIO
+from collections import namedtuple
+
+Article = namedtuple('Article', ['title', 'text', 'categories', 'id'])
 
 def db_get_populated_articles(ts=1, limit=10000):
 	"""
@@ -8,26 +11,16 @@ def db_get_populated_articles(ts=1, limit=10000):
 	articles[i][0] = Title of article
 	articles[i][1] = Text in article
 	articles[i][2] = Category list
+	articles[i][3] = MongoDB ID
 	"""
-	articles = app.getPopulatedArticlesByTimeStamp(ts,limit);
+	articles = app.getArticlesByTimeStamp(ts,limit);
 	articles_returned = [];
 	for article in articles['articleArray']:
-		articles_returned.append((article['title'], article['text'], article['categories'], article['_id']))
+		articles_returned.append(Article(article['title'], article['text'], article['categories'], article['_id']))
 	return articles_returned
 
 def db_get_populated_articles_count(ts=1):
 	"""
 	Counts the number of useful articles (most recent version, populated articles)
 	"""
-	return app.getPopulatedArticlesCount(ts)
-
-
-def db_get_unique_categories(ts=1):
-	"""
-	Returns a list of unique categories in the DB
-	"""
-	listCat = set([]);
-	articles = app.getPopulatedArticlesByTimeStamp(ts,1000)
-	for article in articles['articleArray']:
-		listCat.add(article['categories'][0]);
-	return listCat;
+	return app.getArticlesCount(ts)

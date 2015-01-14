@@ -68,17 +68,3 @@ def cross_validation(clf, X, Y, num_folds=10):
         accs.append(acc)
 
     return np.mean(accs)
-
-
-# Testing:
-
-# articles_labels = get_articles()
-# articles = [article[0]['text'] for article in articles_labels]
-# labels = [article[1] for article in articles_labels]
-# X, vectorizer = vectorize(articles)
-
-# # Now we have a vectorized matrix X for all of the articles
-# clf = svm.SVC(gamma=0.001, C=100.)
-# clf.fit(X, labels)
-# accuracy = cross_validation(clf, X, labels, num_folds=10)
-# print "accuracy", accuracy

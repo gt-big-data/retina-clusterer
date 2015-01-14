@@ -12,18 +12,18 @@ from datetime import datetime, timedelta
 client = MongoClient('mongodb://146.148.59.202:27017/')
 db = client['big_data']
 
-def getPopulatedArticlesByTimeStamp(timeStamp, limit):
+def getArticlesByTimeStamp(timeStamp, limit=1000):
     timeObj = datetime.utcfromtimestamp(timeStamp);
-    articles = db.articles.find({'$and': [{"v": "0.0.7"}, {"text": {'$ne': ''}}, {"title": {'$ne': ''}}, {"categories": {'$ne': [], '$ne': None}}, {"recent_pub_date": {"$gte":  timeObj}}]}).limit(limit);
+    articles = db.articles.find({'$and': [{"v": "0.0.6"}, {"text": {'$ne': ''}}, {"title": {'$ne': ''}}, {"categories": {'$ne': [], '$ne': None}}, {"recent_pub_date": {"$gte":  timeObj}}]}).limit(limit);
     returnObject = {"articleArray": []}
     for article in articles:
         returnObject['articleArray'].append(article)
 
     return returnObject
 
-def getPopulatedArticlesCount(timeStamp):
+def getPopulatedCount(timeStamp):
     timeObj = datetime.utcfromtimestamp(timeStamp);
-    count = db.articles.find({'$and': [{"v": "0.0.7"}, {"text": {'$ne': ''}}, {"title": {'$ne': ''}}, {"categories": {'$ne': [], '$ne': None}}, {"recent_pub_date": {"$gte":  timeObj}}]}).count()
+    count = db.articles.find({'$and': [{"v": "0.0.6"}, {"text": {'$ne': ''}}, {"title": {'$ne': ''}}, {"categories": {'$ne': [], '$ne': None}}, {"recent_pub_date": {"$gte":  timeObj}}]}).count()
     return count
 
 # The next functions are for clusters
@@ -61,17 +61,22 @@ def getCluster(clusterName):
 
 def createCluster(clusterName, objectID):
     # objectID is an array
-    db.clusters.insert( { "clusterName": clusterName, "_id": hashlib.md5(clusterName).hexdigest(), "objectIDs": objectID } )
+    db.clusters.insert( { "clusterName": clusterName, "_id": hashlib.md5(clusterName).hexdigest(), "articles": objectID } )
 
 def deleteCluster(clusterName):
     db.clusters.remove( { "clusterName": clusterName })
 
-def insertToCluster(articleIDs, clusterName):
-    # articleIDs is an array
-    db.clusters.update( { "clusterName": clusterName }, { "$push": { "articles": articleIDs } } )
+def insertToCluster(articleIDs, clusterName): # articleIDs is an array
+    db.clusters.update( { "clusterName": clusterName }, { "$push": { "articles": {'$each': articleIDs} } } )
 
 def deleteFromCluster(articleIDs, clusterName):
-    db.clusters.update( { "clusterName": clusterName }, { "$pull": { "articles": articleIDs } } )
+    db.clusters.update( { "clusterName": clusterName }, { "$pull": { "articles": {'$in': articleIDs} } } )
 
 def getClusterArticleCount(clusterName):
-    return db.clusters.find({ "clusterName": clusterName }).count();
+    cluster = db.clusters.find_one({ "clusterName": clusterName })
+    if not cluster:
+        return -1
+
+    if 'articles' not in cluster:
+        return 0
+    return cluster["articles"];
