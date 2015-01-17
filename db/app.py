@@ -79,4 +79,4 @@ def getClusterArticleCount(clusterName):
 
     if 'articles' not in cluster:
         return 0
-    return cluster["articles"];
+    return len(cluster["articles"]);

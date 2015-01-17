@@ -3,6 +3,8 @@ from app import *
 
 clusterList = getArticleClusterList();
 print 'Number of clusters: '+str(len(clusterList))+'\n'
+array = [];
 for cluster in clusterList:
-	myCount = getClusterArticleCount(cluster);
-	print cluster+' ( '+str(myCount)+' )\n'
+	myCount = getClusterArticleCount(cluster)
+	array.append(cluster+': '+str(myCount))
+print "|".join(array)
