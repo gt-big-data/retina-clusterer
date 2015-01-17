@@ -1,0 +1,1 @@
+sudo apt-get install git gfortran liblapack-dev libblas-dev
