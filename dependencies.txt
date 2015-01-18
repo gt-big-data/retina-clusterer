@@ -1,4 +1,15 @@
-Scikit-learn
+Requirements to run these programs
+
 Python (>= 2.6 or >= 3.3)
+Pymongo: to connect to the database
 NumPy >= 1.6.2
 SciPy >= 0.9
+Scikit-learn (Sklearn)
+
+Requirements for the GCE instance:
+
+nltk==3.0.1
+numpy==1.9.1
+pymongo==2.7.2
+scikit-learn==0.15.2
+scipy==0.15.0

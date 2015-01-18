@@ -8,10 +8,10 @@ Article = namedtuple('Article', ['title', 'text', 'categories', 'id'])
 def db_get_populated_articles(ts=1, limit=10000):
 	"""
 	Connects to the database, pulls up the recent version of articles puts them in a list where:
-	articles[i][0] = Title of article
-	articles[i][1] = Text in article
-	articles[i][2] = Category list
-	articles[i][3] = MongoDB ID
+	articles[i][0] = Title of article articles[i].title
+	articles[i][1] = Text in article articles[i].text
+	articles[i][2] = Category list articles[i].categories
+	articles[i][3] = MongoDB ID articles[i].id
 	"""
 	articles = app.getArticlesByTimeStamp(ts,limit);
 	articles_returned = [];

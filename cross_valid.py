@@ -12,8 +12,8 @@ from article_loader import get_articles, get_test_data
 timestamp = time.time(); timestamp = timestamp - 100*24*60*60;
 test_data = db_get_populated_articles(timestamp, 1000);
 
-test_articles = [x[1] for x in test_data];
-test_labels = [x[2][0] for x in test_data];
+test_articles = [x.text for x in test_data];
+test_labels = [x.categories[0] for x in test_data];
 
 test_tfidf, vectorizer = vectorize(test_articles);
 

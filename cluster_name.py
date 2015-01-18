@@ -1,6 +1,4 @@
 # clusters = ['Politics', 'Sports', 'Technology', 'Arts', 'Justice', 'Travel', 'Dining', 'Health', 'Business', 'World', 'Theater', 'Science', 'US', 'Movies', 'Opinion'];
-
-
 def cluster_name(clus):
 	clus = clus.lower();
 	if(clus == 'politics'):
