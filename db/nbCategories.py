@@ -2,9 +2,9 @@
 from app import *
 
 clusterList = getArticleClusterList();
-print 'Number of clusters: '+str(len(clusterList))+'\n'
+print 'Number of clusters: '+str(len(clusterList))
 array = [];
 for cluster in clusterList:
 	myCount = getClusterArticleCount(cluster)
 	array.append(cluster+': '+str(myCount))
-print "|".join(array)
+print "| "+(" | ".join(array))+" |"+'\n'
