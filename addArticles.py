@@ -18,7 +18,7 @@ class AddArticles():
         self.db.clusters.update(newQuery, {"$addToSet" : {"articles" : {"$each" : ids}}})
 
 a = AddArticles()
-categories = ["showbiz", "movies", "arts", "justice", "dining", "health", "technology", "business"]
+categories = ["showbiz", "movies", "arts", "justice", "dining", "health", "technology", "business", "science"]
 for c in categories:
     clustername = cluster_name(c)
     a.findAndAddArticles(c, clustername)
