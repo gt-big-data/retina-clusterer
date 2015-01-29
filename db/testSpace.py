@@ -18,8 +18,8 @@ def updatedGetCluster(clusterName, limit = 0):
         return {
             "error": "Error: No " + clusterName + " cluster found."
         }
-
-    articles = db.articles.find ( { "$query": { "_id":  { "$in": cluster["articles"] } }, "$orderby": { 'recent_pub_date' : -1 }, "$limit": limit } )
+    articles = db.articles.find ( { "$query": { "_id":  { "$in": cluster["articles"] } }, "$orderby": { 'recent_pub_date' : -1 } } ).limit(limit)
+    # "$orderby": { 'recent_pub_date' : -1 },
     count = 0
     for a in articles:
         count += 1
@@ -27,4 +27,4 @@ def updatedGetCluster(clusterName, limit = 0):
     return count;
     # return len(dumps(articles));
 
-print updatedGetCluster("Politics")
+print updatedGetCluster("Politics", 41)
