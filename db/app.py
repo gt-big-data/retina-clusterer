@@ -52,7 +52,6 @@ def insertToCluster(articleIDs, clusterName): # articleIDs is an array
 def deleteFromCluster(articleIDs, clusterName):
     db.clusters.update( { "clusterName": clusterName }, { "$pull": { "articles": {'$in': articleIDs} } } )
 
-
 def getLatestCluster(clusterName, limit = 50):
     cluster = db.clusters.find_one({ "clusterName": clusterName })
     if limit == 0: # If limit is 0, get ALL articles.
