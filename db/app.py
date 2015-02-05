@@ -39,35 +39,6 @@ def getArticleClusterList():
 
     return clusterNameArray
 
-def getCluster(clusterName, limit = 0):
-    cluster = db.clusters.find({ "clusterName": clusterName })
-    if limit == 0:
-        limit = cluster.count()
-
-    if cluster.count() <= 0:
-        return {
-            "error": "Error: No " + clusterName + " cluster found."
-        }
-
-    articles = []
-
-    index = 0
-    for articleId in cluster[0][u'articles']:
-        if index < limit:
-            article = db.articles.find_one({ "_id": articleId })
-            # There must be a more effective way to get all the articles
-            # without making the cursor go over the db multiple times...
-            articles.append(article)
-            index += 1
-        else:
-            break
-
-    return {
-        "clusterName": cluster[0][u'clusterName'],
-        "articles": articles,
-        "_id": cluster[0][u'_id'],
-    }
-
 def createCluster(clusterName, objectID):
     # objectID is an array
     db.clusters.insert( { "clusterName": clusterName, "_id": hashlib.md5(clusterName).hexdigest(), "articles": objectID } )
@@ -94,7 +65,7 @@ def getLatestCluster(clusterName, limit = 50):
 
     clean_articles = [];
     for article in articles:
-        clean_articles.append(Article(article['title'], article['text'], article['categories'], article['recent_pub_date'], article['_id']))
+        clean_articles.append(Article(article['title'], article['text'], clusterName, article['recent_pub_date'], article['_id']))
 
     return clean_articles
 
