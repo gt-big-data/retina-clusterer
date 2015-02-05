@@ -3,7 +3,8 @@ from bson.objectid import ObjectId
 import time
 import hashlib
 import md5
-from datetime import datetime, timedelta
+from datetime import datetime
+from collections import namedtuple
 
 ## ~~~FOR USE IN LOCALHOST ONLY~~~ :D ##
 # client = MongoClient('mongodb://localhost:27017/')
@@ -11,6 +12,8 @@ from datetime import datetime, timedelta
 
 client = MongoClient('mongodb://146.148.59.202:27017/')
 db = client['big_data']
+
+Article = namedtuple('Article', ['title', 'text', 'categories', 'clusterDate', 'id']) # This used with getLatestCluster(limit = 0)
 
 def getArticlesByTimeStamp(timeStamp, limit=1000):
     timeObj = datetime.utcfromtimestamp(timeStamp);
@@ -36,8 +39,10 @@ def getArticleClusterList():
 
     return clusterNameArray
 
-def getCluster(clusterName):
+def getCluster(clusterName, limit = 0):
     cluster = db.clusters.find({ "clusterName": clusterName })
+    if limit == 0:
+        limit = cluster.count()
 
     if cluster.count() <= 0:
         return {
@@ -45,19 +50,23 @@ def getCluster(clusterName):
         }
 
     articles = []
+
+    index = 0
     for articleId in cluster[0][u'articles']:
-        article = db.articles.find_one({ "_id": articleId })
-        # There must be a more effective way to get all the articles
-        # without making the cursor go over the db multiple times...
-        articles.append(article)
+        if index < limit:
+            article = db.articles.find_one({ "_id": articleId })
+            # There must be a more effective way to get all the articles
+            # without making the cursor go over the db multiple times...
+            articles.append(article)
+            index += 1
+        else:
+            break
 
     return {
         "clusterName": cluster[0][u'clusterName'],
         "articles": articles,
         "_id": cluster[0][u'_id'],
-        "features": cluster[0][u'features'],
     }
-
 
 def createCluster(clusterName, objectID):
     # objectID is an array
@@ -71,6 +80,32 @@ def insertToCluster(articleIDs, clusterName): # articleIDs is an array
 
 def deleteFromCluster(articleIDs, clusterName):
     db.clusters.update( { "clusterName": clusterName }, { "$pull": { "articles": {'$in': articleIDs} } } )
+
+
+def getLatestCluster(clusterName, limit = 50):
+    cluster = db.clusters.find_one({ "clusterName": clusterName })
+    if limit == 0: # If limit is 0, get ALL articles.
+        limit = getClusterArticleCount(clusterName);
+    if cluster['articles'] is None:
+        return {
+            "error": "Error: No " + clusterName + " cluster found."
+        }
+    articles = db.articles.find ( { "$query": { "_id":  { "$in": cluster["articles"] } }, "$orderby": { 'recent_pub_date' : -1 } } ).limit(limit)
+
+    clean_articles = [];
+    for article in articles:
+        clean_articles.append(Article(article['title'], article['text'], article['categories'], article['recent_pub_date'], article['_id']))
+
+    return clean_articles
+
+def getTrainingSet(limit = 50):
+    clusterList = getArticleClusterList()
+    trainingSet = []
+
+    for cluster in clusterList:
+        trainingSet.append(getLatestCluster(cluster, limit))
+
+    return trainingSet
 
 def getClusterArticleCount(clusterName):
     cluster = db.clusters.find_one({ "clusterName": clusterName })
