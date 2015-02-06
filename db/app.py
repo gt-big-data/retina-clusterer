@@ -87,3 +87,9 @@ def getClusterArticleCount(clusterName):
     if 'articles' not in cluster:
         return 0
     return len(cluster["articles"]);
+
+def getArticleCluster(articleID):
+    clusterList = getArticleClusterList()
+    cursor = db.clusters.find({"articles": ObjectId(articleID)}, {"clusterName": 1, "_id":0})
+    for cluster in cursor:
+        return cluster.get("clusterName")
