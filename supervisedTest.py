@@ -5,6 +5,9 @@ import numpy as np
 from StringIO import StringIO
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
+
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.tree import DecisionTreeClassifier
 from sklearn.naive_bayes import MultinomialNB
 
 count_vect = CountVectorizer() #initialize the vectorizer
@@ -26,9 +29,11 @@ testTfidf = tfidf_trans.transform(testCounts)
 
 #PHASE2: Classification
 
-clf = MultinomialNB().fit(trainingTfidf, trainingLabels) # train classifier
-
-testPredictedLabels = clf.predict(testTfidf)
+# clf = MultinomialNB()
+# clf = DecisionTreeClassifier(max_depth=7)
+clf = KNeighborsClassifier(20)
+clf.fit(trainingTfidf.toarray(), trainingLabels) # train classifier
+testPredictedLabels = clf.predict(testTfidf.toarray())
 
 right = 0;
 for truth, predicted in zip(testPredictedLabels, testTrueLabels):

@@ -13,11 +13,7 @@ def db_get_populated_articles(ts=1, limit=10000):
 	articles[i][2] = Category list articles[i].categories
 	articles[i][3] = MongoDB ID articles[i].id
 	"""
-	articles = app.getArticlesByTimeStamp(ts,limit);
-	articles_returned = [];
-	for article in articles['articleArray']:
-		articles_returned.append(Article(article['title'], article['text'], article['categories'], article['_id']))
-	return articles_returned
+	return app.getArticlesByTimeStamp(ts,limit);
 
 def db_get_populated_articles_count(ts=1):
 	"""

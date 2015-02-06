@@ -18,9 +18,9 @@ Article = namedtuple('Article', ['title', 'text', 'categories', 'clusterDate', '
 def getArticlesByTimeStamp(timeStamp, limit=1000):
     timeObj = datetime.utcfromtimestamp(timeStamp);
     articles = db.articles.find({'$and': [{"v": "0.0.6"}, {"text": {'$ne': ''}}, {"title": {'$ne': ''}}, {"categories": {'$ne': [], '$ne': None}}, {"recent_pub_date": {"$gte":  timeObj}}]}).limit(limit);
-    returnObject = {"articleArray": []}
+    returnObject = [];
     for article in articles:
-        returnObject['articleArray'].append(article)
+        returnObject.append(Article(article['title'], article['text'], article['categories'][0], article['recent_pub_date'], article['_id'])) # this is old categories, be careful
 
     return returnObject
 
