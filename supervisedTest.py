@@ -5,6 +5,9 @@ import numpy as np
 from StringIO import StringIO
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
+
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.tree import DecisionTreeClassifier
 from sklearn.naive_bayes import MultinomialNB
 
 
@@ -36,8 +39,6 @@ def static_classfier_test(testText):
 
 	testCounts = count_vect.transform(testText)
 	testTfidf = tfidf_trans.transform(testCounts)
-
-	#PHASE2: Classification
 
 	clf = MultinomialNB().fit(trainingTfidf, trainingLabels) # train classifier
 

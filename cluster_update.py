@@ -11,8 +11,8 @@ from sklearn.naive_bayes import MultinomialNB
 from bson.objectid import ObjectId
 
 # This function should be ran every 4 hours in the future (!)
-new_articles = db_get_populated_articles(ts = time.time() - 4 * 3600) # last four hours
-training_set = db_get_populated_articles(ts = time.time() - 3 * 86400) # last 3 days
+new_articles = app.getArticlesCount(time.time() - 4 * 3600) # last four hours
+training_set = app.getArticlesCount(time.time() - 3 * 86400) # last 3 days
 training_articles = []
 training_labels = []
 
