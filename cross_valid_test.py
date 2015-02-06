@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import time
 import numpy as np
-from db_article_loader import db_get_populated_articles
+from db import app
 from classification import vectorize
 from classification import cross_validation
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
@@ -30,7 +30,7 @@ classifiers = [
     MultinomialNB()]
 
 timestamp = time.time(); timestamp = timestamp - 100*24*60*60;
-test_data = db_get_populated_articles(timestamp, 1000);
+test_data = app.getArticlesCount(timestamp, 1000);
 
 test_articles = [x[1] for x in test_data];
 test_labels = [x[2][0] for x in test_data];

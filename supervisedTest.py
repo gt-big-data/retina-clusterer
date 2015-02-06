@@ -29,9 +29,9 @@ testTfidf = tfidf_trans.transform(testCounts)
 
 #PHASE2: Classification
 
-# clf = MultinomialNB()
+clf = MultinomialNB()
 # clf = DecisionTreeClassifier(max_depth=7)
-clf = KNeighborsClassifier(20)
+# clf = KNeighborsClassifier(20)
 clf.fit(trainingTfidf.toarray(), trainingLabels) # train classifier
 testPredictedLabels = clf.predict(testTfidf.toarray())
 
