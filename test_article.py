@@ -17,6 +17,7 @@ def test_one_article():
 def test_all_articles():
 	all_files = os.listdir('Test_Articles')
 	#print all_files
+	all_files.remove('ReadMe.txt')
 	__test_files(all_files)
 
 
