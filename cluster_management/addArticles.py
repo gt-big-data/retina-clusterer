@@ -1,3 +1,4 @@
+#the goal of this program is to fill the clusters initially for a potential training set
 import pymongo
 from cluster_name import cluster_name
 

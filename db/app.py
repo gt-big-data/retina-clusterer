@@ -52,7 +52,7 @@ def insertToCluster(articleIDs, clusterName): # articleIDs is an array
 def deleteFromCluster(articleIDs, clusterName):
     db.clusters.update( { "clusterName": clusterName }, { "$pull": { "articles": {'$in': articleIDs} } } )
 
-def getLatestCluster(clusterName, limit = 50):
+def getLatestCluster(clusterName, limit = 50, skip=0):
     cluster = db.clusters.find_one({ "clusterName": clusterName })
     if limit == 0: # If limit is 0, get ALL articles.
         limit = getClusterArticleCount(clusterName);
@@ -60,7 +60,7 @@ def getLatestCluster(clusterName, limit = 50):
         return {
             "error": "Error: No " + clusterName + " cluster found."
         }
-    articles = db.articles.find ( { "$query": { "_id":  { "$in": cluster["articles"] } }, "$orderby": { 'recent_pub_date' : -1 } } ).limit(limit)
+    articles = db.articles.find ( { "$query": { "_id":  { "$in": cluster["articles"] } }, "$orderby": { 'recent_pub_date' : -1 } } ).skip(skip).limit(limit)
 
     clean_articles = [];
     for article in articles:
@@ -68,12 +68,14 @@ def getLatestCluster(clusterName, limit = 50):
 
     return clean_articles
 
-def getTrainingSet(limit = 50):
+def getTrainingSet(limit = 50, skip=0):
     clusterList = getArticleClusterList()
     trainingSet = []
 
     for cluster in clusterList:
-        trainingSet.append(getLatestCluster(cluster, limit))
+        articles = getLatestCluster(cluster, limit, skip)
+        for article in articles:
+            trainingSet.append(article)
 
     return trainingSet
 
