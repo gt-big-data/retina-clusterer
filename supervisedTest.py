@@ -15,7 +15,7 @@ def test_cluster():
 	testArticles = app.getTrainingSet(50, 50) # get the 51->100 latest articles
 	testText = [x.text for x in testArticles]
 	testTrueLabels = [x.categories for x in testArticles]
-	testPredictedLabels = static_classfier_test(testText)
+	testPredictedLabels = static_classifier_test(testText)
 	right = 0;
 	for truth, predicted in zip(testPredictedLabels, testTrueLabels):
 		if truth == predicted:
@@ -23,7 +23,7 @@ def test_cluster():
 	print "Accuracy: ", str(100*float(right) / float(len(testTrueLabels))), "% (On ", str(len(testTrueLabels)), "new articles)"
 
 
-def static_classfier_test(testText):
+def static_classifier_test(testText):
 	count_vect = CountVectorizer() #initialize the vectorizer
 	tfidf_trans = TfidfTransformer() #initialize our tfidf transformer
 
@@ -33,9 +33,6 @@ def static_classfier_test(testText):
 
 	trainingCounts = count_vect.fit_transform(trainingText)
 	trainingTfidf = tfidf_trans.fit_transform(trainingCounts)
-	# testArticles = app.getTrainingSet(50, 50) # get the 51->100 latest articles
-	# testText = [x.text for x in testArticles]
-	# testTrueLabels = [x.categories for x in testArticles]
 
 	testCounts = count_vect.transform(testText)
 	testTfidf = tfidf_trans.transform(testCounts)

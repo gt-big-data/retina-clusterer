@@ -1,34 +1,19 @@
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 import time
 from db import app
-from db_article_loader import db_get_populated_articles
 from classification import vectorize
 from cluster_name import cluster_name
 from collections import defaultdict
-from sklearn.tree import DecisionTreeClassifier
 from sklearn.naive_bayes import MultinomialNB
+from supervisedTest import static_classifier_test
 
 from bson.objectid import ObjectId
 
 # This function should be ran every 4 hours in the future (!)
-new_articles = app.getArticlesCount(time.time() - 4 * 3600) # last four hours
-training_set = app.getArticlesCount(time.time() - 3 * 86400) # last 3 days
-training_articles = []
-training_labels = []
-
-for article in training_set:
-    cleanCat = cluster_name(article[2][0]);
-    if cleanCat != '':
-        training_articles.append(article[1]);
-        training_labels.append(cleanCat);
-
-training_tfidf, vectorizer = vectorize(training_articles);
-clf = DecisionTreeClassifier(max_depth=4) # clf = MultinomialNB();
-clf.fit(training_tfidf.toarray(), training_labels)
+new_articles = app.getArticlesByTimeStamp(time.time() - 4 * 3600) # last four hours
 
 unlabeled_articles = [];
 unlabeled_texts = [];
-
 
 cleanCategoriesDict = defaultdict(list) #Maps a clean category to a list of articleIDs
 
@@ -40,9 +25,7 @@ for article in new_articles:
         unlabeled_articles.append(article);
         unlabeled_texts.append(article.text);
 
-unlabeled_tfidf = vectorizer.transform(unlabeled_texts);
-
-predicted_labels = clf.predict(unlabeled_tfidf.toarray());
+predicted_labels = static_classifier_test(unlabeled_texts)
 
 for new_cat, article in zip(predicted_labels, unlabeled_articles):
     if getattr(article, 'id', None) != None:

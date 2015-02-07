@@ -44,7 +44,7 @@ def __test_files(filenames):
 
 def __test_articles(filenames, articles, labels):
 	print 'training...'
-	testPredictedLabel = supervisedTest.static_classfier_test(articles)
+	testPredictedLabel = supervisedTest.static_classifier_test(articles)
 	if len(filenames) != len(articles) or len(filenames) != len(articles):
 		print "number of file names and articles and labels don't match"
 	for i in range(0,len(filenames)):
