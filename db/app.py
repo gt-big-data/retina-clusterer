@@ -17,16 +17,19 @@ Article = namedtuple('Article', ['title', 'text', 'categories', 'clusterDate', '
 
 def getArticlesByTimeStamp(timeStamp, limit=1000):
     timeObj = datetime.utcfromtimestamp(timeStamp);
-    articles = db.articles.find({'$and': [{"v": "0.0.7"}, {"text": {'$ne': ''}}, {"title": {'$ne': ''}}, {"categories": {'$ne': [], '$ne': None}}, {"recent_pub_date": {"$gte":  timeObj}}]}).limit(limit);
+    articles = db.articles.find({'$and': [{"v": "0.0.7"}, {"text": {'$ne': ''}}, {"title": {'$ne': ''}}, {"recent_download_date": {"$gte":  timeObj}}]}).limit(limit);
     returnObject = [];
     for article in articles:
-        returnObject.append(Article(article['title'], article['text'], article['categories'][0], article['recent_pub_date'], article['_id'])) # this is old categories, be careful
+        cat = ''
+        if article['categories'] is not None:
+            cat = article['categories'][0];
+        returnObject.append(Article(article['title'], article['text'], cat, article['recent_pub_date'], article['_id'])) # this is old categories, be careful
 
     return returnObject
 
 def getPopulatedCount(timeStamp):
     timeObj = datetime.utcfromtimestamp(timeStamp);
-    count = db.articles.find({'$and': [{"v": "0.0.7"}, {"text": {'$ne': ''}}, {"title": {'$ne': ''}}, {"categories": {'$ne': [], '$ne': None}}, {"recent_pub_date": {"$gte":  timeObj}}]}).count()
+    count = db.articles.find({'$and': [{"v": "0.0.7"}, {"text": {'$ne': ''}}, {"title": {'$ne': ''}}, {"recent_download_date": {"$gte":  timeObj}}]}).count()
     return count
 
 # The next functions are for clusters
@@ -47,7 +50,7 @@ def deleteCluster(clusterName):
     db.clusters.remove( { "clusterName": clusterName })
 
 def insertToCluster(articleIDs, clusterName): # articleIDs is an array
-    db.clusters.update( { "clusterName": clusterName }, { "$push": { "articles": {'$each': articleIDs} } } )
+    db.clusters.update( { "clusterName": clusterName }, { "$addToSet": { "articles": {'$each': articleIDs} } } )
 
 def deleteFromCluster(articleIDs, clusterName):
     db.clusters.update( { "clusterName": clusterName }, { "$pull": { "articles": {'$in': articleIDs} } } )

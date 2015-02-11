@@ -18,7 +18,7 @@ unlabeled_texts = [];
 cleanCategoriesDict = defaultdict(list) #Maps a clean category to a list of articleIDs
 
 for article in new_articles:
-    cleanCategory = cluster_name(article[2][0])
+    cleanCategory = cluster_name(article.categories)
     if cleanCategory != '': # a category was already detected
         cleanCategoriesDict[cleanCategory].append(article.id) #Add the article ID
     else: # no category was matched, we will run it through the clustering afterwards
