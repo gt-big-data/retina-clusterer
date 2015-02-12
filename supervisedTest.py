@@ -24,7 +24,7 @@ def test_cluster():
 
 
 def static_classifier_test(testText):
-	count_vect = CountVectorizer() #initialize the vectorizer
+	count_vect = CountVectorizer(stop_words='english') #initialize the vectorizer
 	tfidf_trans = TfidfTransformer() #initialize our tfidf transformer
 
 	trainingArticles = app.getTrainingSet(50, 0) # get the latest 50 articles
@@ -40,5 +40,3 @@ def static_classifier_test(testText):
 	clf = MultinomialNB().fit(trainingTfidf, trainingLabels) # train classifier
 
 	return clf.predict(testTfidf)
-
-	

@@ -22,13 +22,19 @@ vocab = count_vect.vocabulary_
 vocabValue=vocab.keys()
 vocabIndex=vocab.values()
 
-print trainingTitle[0]
 tfidfArray = trainingTfidf.toarray()
 article1 = tfidfArray[0]
-wordIndex = 0
-for wordTfidf in article1:
-	if wordTfidf > 0.1:
-		thisWord = vocabValue[vocabIndex.index(wordIndex)]
-		print thisWord, ": ", wordTfidf
-	wordIndex = wordIndex + 1
+articleCount = 0
+for article in tfidfArray:
+	wordIndex = 0
+	myKeyword = []
+	for wordTfidf in article:
+		if wordTfidf > 0.1:
+			thisWord = vocabValue[vocabIndex.index(wordIndex)]
+			myKeyword.append(thisWord.encode('utf-8'))
+		wordIndex = wordIndex + 1
+	print trainingTitle[articleCount].encode('utf-8'), ": {", ", ".join(myKeyword) ,"}\n\n\n"
+	articleCount = articleCount + 1
+	if articleCount > 10:
+		break
 # print trainingCounts
