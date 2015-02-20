@@ -17,7 +17,8 @@ Article = namedtuple('Article', ['title', 'text', 'categories', 'clusterDate', '
 
 def getArticlesByTimeStamp(timeStamp, limit=1000):
     timeObj = datetime.utcfromtimestamp(timeStamp);
-    articles = db.articles.find({'$and': [{"v": "0.0.7"}, {"text": {'$ne': ''}}, {"title": {'$ne': ''}}, {"recent_download_date": {"$gte":  timeObj}}]}).limit(limit);
+    version = getCrawlerVersion()
+    articles = db.articles.find({'$and': [{"v": version}, {"text": {'$ne': ''}}, {"title": {'$ne': ''}}, {"recent_download_date": {"$gte":  timeObj}}]}).limit(limit);
     returnObject = [];
     for article in articles:
         cat = ''
@@ -29,8 +30,15 @@ def getArticlesByTimeStamp(timeStamp, limit=1000):
 
 def getPopulatedCount(timeStamp):
     timeObj = datetime.utcfromtimestamp(timeStamp);
-    count = db.articles.find({'$and': [{"v": "0.0.7"}, {"text": {'$ne': ''}}, {"title": {'$ne': ''}}, {"recent_download_date": {"$gte":  timeObj}}]}).count()
+    version = getCrawlerVersion()
+    count = db.articles.find({'$and': [{"v": version}, {"text": {'$ne': ''}}, {"title": {'$ne': ''}}, {"recent_download_date": {"$gte":  timeObj}}]}).count()
     return count
+
+def getCrawlerVersion():
+    # Get current version of crawler
+    query = {"_id" : "version"}
+    doc = db.articles.find_one(query)
+    return doc["number"]
 
 # The next functions are for clusters
 def getArticleClusterList():
