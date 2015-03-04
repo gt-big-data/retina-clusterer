@@ -36,7 +36,7 @@ tfidfArray2 = trainingTfidf2.toarray()
 
 articleCount = 0
 
-if articleCount < 10:
+while articleCount < 10:
 	article1 = tfidfArray1[articleCount]
 	article2 = tfidfArray2[articleCount]
 	wordIndex1 = 0
@@ -50,7 +50,7 @@ if articleCount < 10:
 	wordIndex2 = 0
 	myKeyword2 = []
 	for wordTfidf2 in article2:
-		if wordTfidf2 > 0.15:
+		if wordTfidf2 > 0.1:
 			thisWord = vocabValue2[vocabIndex2.index(wordIndex2)]
 			myKeyword2.append(thisWord.encode('utf-8'))
 		wordIndex2 = wordIndex2 + 1
