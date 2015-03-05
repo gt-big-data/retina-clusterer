@@ -17,7 +17,7 @@ def static_classifier_test(testText):
 	count_vect = CountVectorizer(stop_words='english') #initialize the vectorizer
 	tfidf_trans = TfidfTransformer() #initialize our tfidf transformer
 
-	trainingArticles = app.getTrainingSet(50, 0) # get the latest 50 articles
+	trainingArticles = app.getTrainingSet(40, 0) # get the latest 50 articles
 	trainingText = [x.text for x in trainingArticles]
 	trainingLabels = [x.categories for x in trainingArticles]
 

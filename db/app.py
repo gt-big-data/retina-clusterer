@@ -3,7 +3,7 @@ from bson.objectid import ObjectId
 import time
 import hashlib
 import md5
-from datetime import datetime
+from datetime import datetime, date, timedelta
 from collections import namedtuple
 
 ## ~~~FOR USE IN LOCALHOST ONLY~~~ :D ##
@@ -25,7 +25,18 @@ def getArticlesByTimeStamp(timeStamp, limit=1000):
         if article['categories'] is not None:
             cat = article['categories'][0];
         returnObject.append(Article(article['title'], article['text'], cat, article['recent_download_date'], article['_id'])) # this is old categories, be careful
+    return returnObject
 
+def getArticlesInLastNDays(n=10, limit=1000):
+    timeObj = datetime.now() - timedelta(days=n);
+    version = getCrawlerVersion()
+    articles = db.articles.find({'$and': [{"v": version}, {"text": {'$ne': ''}}, {"title": {'$ne': ''}}, {"recent_download_date": {"$gte":  timeObj}}]}).limit(limit);
+    returnObject = [];
+    for article in articles:
+        cat = ''
+        if article['categories'] is not None:
+            cat = article['categories'][0];
+        returnObject.append(Article(article['title'], article['text'], cat, article['recent_pub_date'], article['_id'])) # this is old categories, be careful
     return returnObject
 
 def getPopulatedCount(timeStamp):
