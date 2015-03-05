@@ -125,4 +125,4 @@ def insertCleanArticle(article):
         try:
             db.cleanArticles.insert( { "_id": article.id, "title": article.title, "text": article.text, "download_time": article.clusterDate, "category": article.categories, "keywords": [] } )
         except:
-            print "0" # what happened here is there was a duplicate key
+            pass # print "0" # what happened here is there was a duplicate key
