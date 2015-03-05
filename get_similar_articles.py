@@ -24,9 +24,20 @@ def getSimilarArticles(article, numOfDays, numOfNeighbors):
 
 	targetCounts = count_vect.transform([article.text])
 	targetTfidf = tfidf_trans.transform(targetCounts)
+	array1 = trainingTfidf.toarray()
+	for i in range(0,trainingTfidf.shape[0]):
+		for j in range(0,trainingTfidf.shape[1]):
+			if array1[i,j] <0.07:
+				array1[i,j] = 0
 
-	neigh.fit(trainingTfidf,rainingLabels)
-	similar_articles_tfidf = neigh.kneighbors(targetTfidf, numOfNeighbors, False)
+	array2 = targetTfidf.toarray()
+	for i in range(0,targetTfidf.shape[0]):
+		for j in range(0,targetTfidf.shape[1]):
+			if array2[i,j] <0.09:
+				array2[i,j] = 0
+
+	neigh.fit(array1,rainingLabels)
+	similar_articles_tfidf = neigh.kneighbors(array2, numOfNeighbors, False)
 	similar_articles = []
 	for index in similar_articles_tfidf[0]:
 		similar_articles.append(articles[index].title)
@@ -34,7 +45,7 @@ def getSimilarArticles(article, numOfDays, numOfNeighbors):
 
 
 trainingArticles = app.getTrainingSet(1, 0)
-target = trainingArticles[4]
+target = trainingArticles[7]
 print target.title
 
 similar_articles = getSimilarArticles(target, 10, 4)
