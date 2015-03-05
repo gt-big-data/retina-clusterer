@@ -1,4 +1,4 @@
-from pymongo import MongoClient
+from pymongo import MongoClient, errors
 from bson.objectid import ObjectId
 import time
 import hashlib
@@ -104,3 +104,14 @@ def getArticleCluster(articleID):
     cursor = db.clusters.find({"articles": ObjectId(articleID)}, {"clusterName": 1, "_id":0})
     for cluster in cursor:
         return cluster.get("clusterName")
+
+def insertCleanArticle(article):
+    if (article.title == '') | (article.title is None):
+        return -1
+    elif article.text == '':
+        return -1
+    else:
+        try:
+            db.cleanArticles.insert( { "_id": article.id, "title": article.title, "text": article.text, "download_time": article.clusterDate, "category": article.categories, "keywords": [] } )
+        except:
+            print "0" # what happened here is there was a duplicate key
