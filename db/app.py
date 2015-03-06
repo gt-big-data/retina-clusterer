@@ -1,4 +1,4 @@
-from pymongo import MongoClient
+from pymongo import MongoClient, errors
 from bson.objectid import ObjectId
 import time
 import hashlib
@@ -24,7 +24,7 @@ def getArticlesByTimeStamp(timeStamp, limit=1000):
         cat = ''
         if article['categories'] is not None:
             cat = article['categories'][0];
-        returnObject.append(Article(article['title'], article['text'], cat, article['recent_pub_date'], article['_id'])) # this is old categories, be careful
+        returnObject.append(Article(article['title'], article['text'], cat, article['recent_download_date'], article['_id'])) # this is old categories, be careful
     return returnObject
 
 def getArticlesInLastNDays(n=10, limit=1000):
@@ -73,11 +73,11 @@ def getLatestCluster(clusterName, limit = 50, skip=0):
         return {
             "error": "Error: No " + clusterName + " cluster found."
         }
-    articles = db.articles.find ( { "$query": { "_id":  { "$in": cluster["articles"] } }, "$orderby": { 'recent_pub_date' : -1 } } ).skip(skip).limit(limit)
+    articles = db.articles.find ( { "$query": { "_id":  { "$in": cluster["articles"] } }, "$orderby": { 'recent_download_date' : -1 } } ).skip(skip).limit(limit)
 
     clean_articles = [];
     for article in articles:
-        clean_articles.append(Article(article['title'], article['text'], clusterName, article['recent_pub_date'], article['_id']))
+        clean_articles.append(Article(article['title'], article['text'], clusterName, article['recent_download_date'], article['_id']))
 
     return clean_articles
 
@@ -106,3 +106,14 @@ def getArticleCluster(articleID):
     cursor = db.clusters.find({"articles": ObjectId(articleID)}, {"clusterName": 1, "_id":0})
     for cluster in cursor:
         return cluster.get("clusterName")
+
+def insertCleanArticle(article):
+    if (article.title == '') | (article.title is None):
+        return -1
+    elif article.text == '':
+        return -1
+    else:
+        try:
+            db.cleanArticles.insert( { "_id": article.id, "title": article.title, "text": article.text, "download_time": article.clusterDate, "category": article.categories, "keywords": [] } )
+        except:
+            pass # print "0" # what happened here is there was a duplicate key

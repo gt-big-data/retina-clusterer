@@ -31,14 +31,12 @@ def static_classifier_test(testText):
 
 	return clf.predict(testTfidf)
 
-testArticles = app.getTrainingSet(50, 40) # get the 51->100 latest articles
-testText = [x.text for x in testArticles]
-testTrueLabels = [x.categories for x in testArticles]
-testPredictedLabels = static_classifier_test(testText)
-right = 0;
-for truth, predicted in zip(testPredictedLabels, testTrueLabels):
-	if truth == predicted:
-		right += 1
-print "Accuracy: ", str(100*float(right) / float(len(testTrueLabels))), "% (On ", str(len(testTrueLabels)), "new articles)"
-
-
+# testArticles = app.getTrainingSet(50, 100) # get the 51->100 latest articles
+# testText = [x.text for x in testArticles]
+# testTrueLabels = [x.categories for x in testArticles]
+# testPredictedLabels = static_classifier_test(testText)
+# right = 0;
+# for truth, predicted in zip(testPredictedLabels, testTrueLabels):
+# 	if truth == predicted:
+# 		right += 1
+# print "Accuracy: ", str(100*float(right) / float(len(testTrueLabels))), "% (On ", str(len(testTrueLabels)), "new articles)"
