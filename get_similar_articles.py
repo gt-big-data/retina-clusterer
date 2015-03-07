@@ -9,14 +9,14 @@ from sklearn.neighbors import KNeighborsClassifier
 
 
 def getSimilarArticles(target, numOfDays, numOfNeighbors):
-    articles = app.getTrainingSet(500, 100)
+    articles = app.getTrainingSet(500, 70)
     neigh = KNeighborsClassifier()
-    count_vect = CountVectorizer(stop_words='english')
+    count_vect = CountVectorizer(stop_words='english', ngram_range=(1,2))
     tfidf_trans = TfidfTransformer()
     trainingTitle = [x.title for x in articles]
     trainingLabels = [x.categories for x in articles]
     targetTitleCounts = count_vect.fit_transform([target.title])
-    targetCounts = count_vect.transform([target.text])
+    targetCounts = count_vect.transform([target.text]) + targetTitleCounts
     trainingCounts = count_vect.transform(trainingTitle)
     print count_vect.get_feature_names()
     trainingCountsTfidf = tfidf_trans.fit_transform(trainingCounts)
@@ -33,8 +33,8 @@ def getSimilarArticles(target, numOfDays, numOfNeighbors):
     return similar_articles
 
 
-trainingArticles = app.getTrainingSet(1, 99)
-target = trainingArticles[5]
+trainingArticles = app.getTrainingSet(1, 69)
+target = trainingArticles[11]
 print 'Target article title:'
 
 print target.title
