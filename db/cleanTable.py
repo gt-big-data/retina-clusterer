@@ -11,5 +11,5 @@ def writeArticle(uid, title, text, download_time, category = '', keywords = []):
 def databaseFiller():
 	articles = app.getTrainingSet(100, 0)
 	for article in articles:
-		writeArticle(article.id, article.title, article.text, article.clusterDate, article.categories, [])
+		writeArticle(article.id, article.title, article.text, article.clusterDate, article.category, [])
 databaseFiller()

@@ -13,7 +13,7 @@ from collections import namedtuple
 client = MongoClient('mongodb://146.148.59.202:27017/')
 db = client['big_data']
 
-Article = namedtuple('Article', ['title', 'text', 'categories', 'clusterDate', 'id']) # This used with getLatestCluster(limit = 0)
+Article = namedtuple('Article', ['title', 'text', 'category', 'clusterDate', 'id', 'keywords']) # This used with getLatestCluster(limit = 0)
 
 def getArticlesByTimeStamp(timeStamp, limit=1000):
     timeObj = datetime.utcfromtimestamp(timeStamp);
@@ -24,7 +24,7 @@ def getArticlesByTimeStamp(timeStamp, limit=1000):
         cat = ''
         if article['categories'] is not None:
             cat = article['categories'][0];
-        returnObject.append(Article(article['title'], article['text'], cat, article['recent_download_date'], article['_id'])) # this is old categories, be careful
+        returnObject.append(Article(article['title'], article['text'], cat, article['recent_download_date'], article['_id'], [])) # this is old categories, be careful
     return returnObject
 
 def getArticlesInLastNDays(n=10, limit=1000):
@@ -36,7 +36,7 @@ def getArticlesInLastNDays(n=10, limit=1000):
         cat = ''
         if article['categories'] is not None:
             cat = article['categories'][0];
-        returnObject.append(Article(article['title'], article['text'], cat, article['recent_pub_date'], article['_id'])) # this is old categories, be careful
+        returnObject.append(Article(article['title'], article['text'], cat, article['recent_pub_date'], article['_id'], [])) # this is old categories, be careful
     return returnObject
 
 def getPopulatedCount(timeStamp):
@@ -86,7 +86,7 @@ def getLatestCluster(clusterName, limit = 50, skip=0):
 
     clean_articles = [];
     for article in articles:
-        clean_articles.append(Article(article['title'], article['text'], clusterName, article['recent_download_date'], article['_id']))
+        clean_articles.append(Article(article['title'], article['text'], clusterName, article['recent_download_date'], article['_id'], []))
 
     return clean_articles
 
@@ -123,6 +123,6 @@ def insertCleanArticle(article):
         return -1
     else:
         try:
-            db.cleanArticles.insert( { "_id": article.id, "title": article.title, "text": article.text, "download_time": article.clusterDate, "category": article.categories, "keywords": [] } )
+            db.cleanArticles.insert( { "_id": article.id, "title": article.title, "text": article.text, "download_time": article.clusterDate, "category": article.category, "keywords": [] } )
         except:
             pass # print "0" # what happened here is there was a duplicate key

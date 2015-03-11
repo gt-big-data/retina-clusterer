@@ -13,7 +13,7 @@ tfidf_trans = TfidfTransformer() #initialize our tfidf transformer
 trainingArticles = app.getTrainingSet(50, 0) # get the latest 50 articles
 trainingTitle = [x.title for x in trainingArticles]
 trainingText = [x.text for x in trainingArticles]
-trainingLabels = [x.categories for x in trainingArticles]
+trainingLabels = [x.category for x in trainingArticles]
 
 trainingCounts = count_vect.fit_transform(trainingText)
 trainingTfidf = tfidf_trans.fit_transform(trainingCounts)

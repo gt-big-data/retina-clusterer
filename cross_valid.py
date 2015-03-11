@@ -13,7 +13,7 @@ timestamp = time.time(); timestamp = timestamp - 100*24*60*60;
 test_data = app.getArticlesCount(timestamp, 1000);
 
 test_articles = [x.text for x in test_data];
-test_labels = [x.categories[0] for x in test_data];
+test_labels = [x.category for x in test_data];
 
 test_tfidf, vectorizer = vectorize(test_articles);
 
