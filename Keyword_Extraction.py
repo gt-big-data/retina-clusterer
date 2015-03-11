@@ -13,10 +13,10 @@ count_vect2 = CountVectorizer(stop_words='english', ngram_range=(2,2))
 tfidf_trans1 = TfidfTransformer()
 tfidf_trans2 = TfidfTransformer()
 
-trainingArticles = app.getTrainingSet(500, 0)
+trainingArticles = app.getTrainingSet(50, 0)
 trainingTitle = [x.title for x in trainingArticles]
 trainingText = [x.text for x in trainingArticles]
-trainingLabels = [x.categories for x in trainingArticles]
+trainingLabels = [x.category for x in trainingArticles]
 
 trainingCounts1 = count_vect1.fit_transform(trainingText)
 trainingCounts2 = count_vect2.fit_transform(trainingText)
@@ -41,25 +41,44 @@ while articleCount < 10:
 	article2 = tfidfArray2[articleCount]
 	wordIndex1 = 0
 	myKeyword1 = []
+	myTfidf1 = []
 	for wordTfidf1 in article1:
-		if wordTfidf1 > 0.8:
+		if wordTfidf1 > 0.15:
 			thisWord = vocabValue1[vocabIndex1.index(wordIndex1)]
 			myKeyword1.append(thisWord.encode('utf-8'))
+			myTfidf1.append(wordTfidf1)
+			#print (thisWord, " ", wordTfidf1)
 		wordIndex1 = wordIndex1 + 1
-	print trainingTitle[articleCount].encode('utf-8'), ": {", ", ".join(myKeyword1) ,"}\n"
+	#print trainingTitle[articleCount].encode('utf-8'), ": {", ", ".join(myKeyword1) ,"}\n"
 	wordIndex2 = 0
 	myKeyword2 = []
+	myTfidf2 = []
 	for wordTfidf2 in article2:
-		if wordTfidf2 > 0.8:
+		if wordTfidf2 > 0.15:
 			thisWord = vocabValue2[vocabIndex2.index(wordIndex2)]
 			myKeyword2.append(thisWord.encode('utf-8'))
+			myTfidf2.append(wordTfidf2)
+			#print (thisWord, " ", wordTfidf2)
 		wordIndex2 = wordIndex2 + 1
-	print "{", ", ".join(myKeyword2) ,"}\n\n\n\n"
-	
-
-
-
+	#print "{", ", ".join(myKeyword2) ,"}\n"
+	splitBigrams = []
+	for bigram in myKeyword2:
+		wordSplit = bigram.split()
+		splitBigrams.append(wordSplit[0])
+		splitBigrams.append(wordSplit[1])
+	for word in splitBigrams:
+		if word in myKeyword1:
+			index = myKeyword1.index(word)
+			myKeyword1.pop(index)
+			myTfidf1.pop(index)
+	for bigram in myKeyword2:
+		myKeyword1.append(bigram)
+	for tfidf in myTfidf2:
+		myTfidf1.append(tfidf)
+	keyWordTfidf = zip(myTfidf1, myKeyword1)
+	keyWordTfidf.sort(reverse=True)
+	keyWordSorted = [keyword for tfidf, keyword in keyWordTfidf]
+	print trainingTitle[articleCount]
+	print keyWordSorted
+	print "\n"
 	articleCount = articleCount + 1
-	#if articleCount > 10:
-	#	break
-# print trainingCounts1
