@@ -3,6 +3,7 @@ from bson.objectid import ObjectId
 import time
 import hashlib
 import md5
+import json
 from datetime import datetime, date, timedelta
 from collections import namedtuple
 
@@ -117,3 +118,22 @@ def insertCleanArticle(article):
             db.cleanArticles.insert( { "_id": article.id, "title": article.title, "text": article.text, "download_time": article.clusterDate, "category": article.category, "keywords": [] } )
         except:
             pass # print "0" # what happened here is there was a duplicate key
+
+def insertCleanArticles(articles):
+    jsonArticles = []
+    for article in articles:
+        if (article.title == '') | (article.title is None):
+            return -1
+        elif article.text == '':
+            return -1
+        else:
+            data = { "_id": article.id, "title": article.title, "text": article.text, "download_time": article.clusterDate, "category": article.categories, "keywords": [] }
+            jsonArticle = json.dumps(data)
+            jsonArticles.append(jsonArticle)
+            # NOTE! MIGHT BE INCORRECT! TRY...
+            # data = { ... }               # as written in code
+            # jsonArticles.append(data)    # effectively removing ln 131
+    try:
+        db.cleanArticles.insert(jsonArticles)
+    except :
+        pass
