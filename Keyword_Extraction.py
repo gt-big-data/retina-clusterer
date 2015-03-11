@@ -41,18 +41,24 @@ while articleCount < 10:
 	article2 = tfidfArray2[articleCount]
 	wordIndex1 = 0
 	myKeyword1 = []
+	myTfidf1 = []
 	for wordTfidf1 in article1:
 		if wordTfidf1 > 0.15:
 			thisWord = vocabValue1[vocabIndex1.index(wordIndex1)]
 			myKeyword1.append(thisWord.encode('utf-8'))
+			myTfidf1.append(wordTfidf1)
+			#print (thisWord, " ", wordTfidf1)
 		wordIndex1 = wordIndex1 + 1
 	#print trainingTitle[articleCount].encode('utf-8'), ": {", ", ".join(myKeyword1) ,"}\n"
 	wordIndex2 = 0
 	myKeyword2 = []
+	myTfidf2 = []
 	for wordTfidf2 in article2:
 		if wordTfidf2 > 0.15:
 			thisWord = vocabValue2[vocabIndex2.index(wordIndex2)]
 			myKeyword2.append(thisWord.encode('utf-8'))
+			myTfidf2.append(wordTfidf2)
+			#print (thisWord, " ", wordTfidf2)
 		wordIndex2 = wordIndex2 + 1
 	#print "{", ", ".join(myKeyword2) ,"}\n"
 	splitBigrams = []
@@ -62,10 +68,17 @@ while articleCount < 10:
 		splitBigrams.append(wordSplit[1])
 	for word in splitBigrams:
 		if word in myKeyword1:
-			myKeyword1.remove(word)
+			index = myKeyword1.index(word)
+			myKeyword1.pop(index)
+			myTfidf1.pop(index)
 	for bigram in myKeyword2:
 		myKeyword1.append(bigram)
+	for tfidf in myTfidf2:
+		myTfidf1.append(tfidf)
+	keyWordTfidf = zip(myTfidf1, myKeyword1)
+	keyWordTfidf.sort(reverse=True)
+	keyWordSorted = [keyword for tfidf, keyword in keyWordTfidf]
 	print trainingTitle[articleCount]
-	print myKeyword1
+	print keyWordSorted
 	print "\n"
 	articleCount = articleCount + 1
