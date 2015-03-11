@@ -16,7 +16,7 @@ def clusterPurge():
 
 	nbArticles = 0
 	for article in articleList:
-		cleanCat = cluster_name(article.categories)
+		cleanCat = cluster_name(article.category)
 		if cleanCat != '':
 			clusterArticles[cleanCat].append(article.id)
 			nbArticles += 1

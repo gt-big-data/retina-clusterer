@@ -19,7 +19,7 @@ def static_classifier_test(testText):
 
 	trainingArticles = app.getTrainingSet(40, 0) # get the latest 50 articles
 	trainingText = [x.text for x in trainingArticles]
-	trainingLabels = [x.categories for x in trainingArticles]
+	trainingLabels = [x.category for x in trainingArticles]
 
 	trainingCounts = count_vect.fit_transform(trainingText)
 	trainingTfidf = tfidf_trans.fit_transform(trainingCounts)
@@ -33,7 +33,7 @@ def static_classifier_test(testText):
 
 # testArticles = app.getTrainingSet(50, 100) # get the 51->100 latest articles
 # testText = [x.text for x in testArticles]
-# testTrueLabels = [x.categories for x in testArticles]
+# testTrueLabels = [x.category for x in testArticles]
 # testPredictedLabels = static_classifier_test(testText)
 # right = 0;
 # for truth, predicted in zip(testPredictedLabels, testTrueLabels):

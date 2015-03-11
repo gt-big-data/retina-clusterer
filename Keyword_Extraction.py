@@ -16,7 +16,7 @@ tfidf_trans2 = TfidfTransformer()
 trainingArticles = app.getTrainingSet(50, 0)
 trainingTitle = [x.title for x in trainingArticles]
 trainingText = [x.text for x in trainingArticles]
-trainingLabels = [x.categories for x in trainingArticles]
+trainingLabels = [x.category for x in trainingArticles]
 
 trainingCounts1 = count_vect1.fit_transform(trainingText)
 trainingCounts2 = count_vect2.fit_transform(trainingText)
@@ -69,4 +69,3 @@ while articleCount < 10:
 	print myKeyword1
 	print "\n"
 	articleCount = articleCount + 1
-
