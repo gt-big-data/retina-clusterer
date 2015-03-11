@@ -13,7 +13,7 @@ count_vect2 = CountVectorizer(stop_words='english', ngram_range=(2,2))
 tfidf_trans1 = TfidfTransformer()
 tfidf_trans2 = TfidfTransformer()
 
-trainingArticles = app.getTrainingSet(500, 0)
+trainingArticles = app.getTrainingSet(50, 0)
 trainingTitle = [x.title for x in trainingArticles]
 trainingText = [x.text for x in trainingArticles]
 trainingLabels = [x.categories for x in trainingArticles]
@@ -42,24 +42,31 @@ while articleCount < 10:
 	wordIndex1 = 0
 	myKeyword1 = []
 	for wordTfidf1 in article1:
-		if wordTfidf1 > 0.8:
+		if wordTfidf1 > 0.15:
 			thisWord = vocabValue1[vocabIndex1.index(wordIndex1)]
 			myKeyword1.append(thisWord.encode('utf-8'))
 		wordIndex1 = wordIndex1 + 1
-	print trainingTitle[articleCount].encode('utf-8'), ": {", ", ".join(myKeyword1) ,"}\n"
+	#print trainingTitle[articleCount].encode('utf-8'), ": {", ", ".join(myKeyword1) ,"}\n"
 	wordIndex2 = 0
 	myKeyword2 = []
 	for wordTfidf2 in article2:
-		if wordTfidf2 > 0.8:
+		if wordTfidf2 > 0.15:
 			thisWord = vocabValue2[vocabIndex2.index(wordIndex2)]
 			myKeyword2.append(thisWord.encode('utf-8'))
 		wordIndex2 = wordIndex2 + 1
-	print "{", ", ".join(myKeyword2) ,"}\n\n\n\n"
-	
-
-
-
+	#print "{", ", ".join(myKeyword2) ,"}\n"
+	splitBigrams = []
+	for bigram in myKeyword2:
+		wordSplit = bigram.split()
+		splitBigrams.append(wordSplit[0])
+		splitBigrams.append(wordSplit[1])
+	for word in splitBigrams:
+		if word in myKeyword1:
+			myKeyword1.remove(word)
+	for bigram in myKeyword2:
+		myKeyword1.append(bigram)
+	print trainingTitle[articleCount]
+	print myKeyword1
+	print "\n"
 	articleCount = articleCount + 1
-	#if articleCount > 10:
-	#	break
-# print trainingCounts1
+
