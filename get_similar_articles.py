@@ -34,7 +34,7 @@ def getSimilarArticles(target, numOfDays, numOfNeighbors):
 
 
 trainingArticles = app.getTrainingSet(1, 69)
-target = trainingArticles[11]
+target = trainingArticles[3]
 print 'Target article title:'
 
 print target.title
