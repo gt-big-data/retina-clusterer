@@ -28,20 +28,7 @@ def getArticlesByTimeStamp(timeStamp, limit=1000):
     return returnObject
 
 def getArticlesInLastNDays(n=10, limit=1000):
-<<<<<<< HEAD
-    timeObj = datetime.now() - timedelta(days=n);
-    version = getCrawlerVersion()
-    articles = db.articles.find({'$and': [{"v": version}, {"text": {'$ne': ''}}, {"title": {'$ne': ''}}, {"recent_download_date": {"$gte":  timeObj}}]}).limit(limit);
-    returnObject = [];
-    for article in articles:
-        cat = ''
-        if article['categories'] is not None:
-            cat = article['categories'][0];
-        returnObject.append(Article(article['title'], article['text'], cat, article['recent_pub_date'], article['_id'], [])) # this is old categories, be careful
-    return returnObject
-=======
     return getArticlesByTimeStamp(time.time() - n*24*3600, limit)
->>>>>>> 64d8c9e2e07103016ac4168d92496e5571e41776
 
 def getPopulatedCount(timeStamp):
     timeObj = datetime.utcfromtimestamp(timeStamp);
