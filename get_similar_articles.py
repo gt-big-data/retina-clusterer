@@ -8,15 +8,7 @@ from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.neighbors import KNeighborsClassifier
 
 
-<<<<<<< HEAD
-def getSimilarArticles(article, numOfDays, numOfNeighbors):
-	articles = app.getTrainingSet(40, 1)
-	neigh = KNeighborsClassifier()
-	count_vect = CountVectorizer(stop_words='english')
-	tfidf_trans = TfidfTransformer()
-	trainingText = [x.text for x in articles]
-	rainingLabels = [x.category for x in articles]
-=======
+
 def getSimilarArticles(target, numOfDays, numOfNeighbors):
     articles = app.getTrainingSet(500, 70)
     neigh = KNeighborsClassifier()
@@ -45,8 +37,6 @@ def getSimilarArticles(target, numOfDays, numOfNeighbors):
 trainingArticles = app.getTrainingSet(1, 69)
 target = trainingArticles[3]
 print 'Target article title:'
->>>>>>> 64d8c9e2e07103016ac4168d92496e5571e41776
-
 print target.title
 print '--------------------------------------'
 similar_articles = getSimilarArticles(target, 6, 10)
