@@ -114,6 +114,8 @@ def insertCleanArticle(article):
         return -1
     else:
         try:
-            db.cleanArticles.insert( { "_id": article.id, "title": article.title, "text": article.text, "download_time": article.clusterDate, "category": article.category, "keywords": [] } )
+            db.cleanarticles.insert( { "_id": article.id, "title": article.title, "text": article.text, "download_time": article.clusterDate, "category": article.category, "keywords": [] } )
         except:
             pass # print "0" # what happened here is there was a duplicate key
+def updateKeywords(articleID, keywords):
+    db.cleanarticles.update({ "_id": articleID },{"$set": {"keywords": keywords}})

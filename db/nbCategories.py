@@ -8,4 +8,4 @@ for cluster in clusterList:
 	myCount = getClusterArticleCount(cluster)
 	array.append(cluster+': '+str(myCount))
 print "| "+(" | ".join(array))+" |"+'\n'
-print "Number of articles in cleanArticles: ", db.cleanArticles.count()
+print "Number of articles in cleanArticles: ", db.cleanarticles.count()
