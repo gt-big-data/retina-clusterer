@@ -89,7 +89,8 @@ def getTrainingSet(limit = 50, skip=0):
     for cluster in clusterList:
         articles = getLatestCluster(cluster, limit, skip)
         for article in articles:
-            trainingSet.append(article)
+            if article.text is not None:
+                trainingSet.append(article)
 
     return trainingSet
 
