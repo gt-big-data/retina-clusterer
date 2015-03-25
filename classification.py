@@ -32,7 +32,6 @@ def vectorize(article_texts):
         stems = stem_tokens(tokens, stemmer)
         return stems
 
-
     tfidf_vectorizer = TfidfVectorizer(tokenizer=tokenize, stop_words='english')
     mat = tfidf_vectorizer.fit_transform(article_texts)
 

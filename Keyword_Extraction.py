@@ -16,7 +16,6 @@ tfidf_trans2 = TfidfTransformer()
 trainingArticles = app.getTrainingSet(50, 0)
 trainingTitle = [x.title for x in trainingArticles]
 trainingText = [x.text for x in trainingArticles]
-trainingLabels = [x.category for x in trainingArticles]
 
 trainingCounts1 = count_vect1.fit_transform(trainingText)
 trainingCounts2 = count_vect2.fit_transform(trainingText)
@@ -56,11 +55,9 @@ while articleCount < 10:
 	for wordTfidf2 in article2:
 		if wordTfidf2 > 0.15:
 			thisWord = vocabValue2[vocabIndex2.index(wordIndex2)]
-			myKeyword2.append(thisWord.encode('utf-8'))
+			myKeyword2.append(thisWord.encode('utf-8', errors='replace'))
 			myTfidf2.append(wordTfidf2)
-			#print (thisWord, " ", wordTfidf2)
 		wordIndex2 = wordIndex2 + 1
-	#print "{", ", ".join(myKeyword2) ,"}\n"
 	splitBigrams = []
 	for bigram in myKeyword2:
 		wordSplit = bigram.split()

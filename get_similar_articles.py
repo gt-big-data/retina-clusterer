@@ -8,7 +8,6 @@ from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.neighbors import KNeighborsClassifier
 
 
-
 def getSimilarArticles(target, numOfDays, numOfNeighbors):
     articles = app.getTrainingSet(500, 70)
     neigh = KNeighborsClassifier()
