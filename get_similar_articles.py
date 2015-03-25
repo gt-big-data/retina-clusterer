@@ -7,13 +7,14 @@ from sklearn.feature_extraction.text import TfidfTransformer
 
 from sklearn.neighbors import KNeighborsClassifier
 
+
 def getSimilarArticles(target, numOfDays, numOfNeighbors):
     articles = app.getTrainingSet(500, 70)
     neigh = KNeighborsClassifier()
     count_vect = CountVectorizer(stop_words='english', ngram_range=(1,2))
     tfidf_trans = TfidfTransformer()
     trainingTitle = [x.title for x in articles]
-    trainingLabels = [x.categories for x in articles]
+    trainingLabels = [1 for x in articles]
     targetTitleCounts = count_vect.fit_transform([target.title])
     targetCounts = count_vect.transform([target.text]) + targetTitleCounts
     trainingCounts = count_vect.transform(trainingTitle)
@@ -33,7 +34,7 @@ def getSimilarArticles(target, numOfDays, numOfNeighbors):
 
 
 trainingArticles = app.getTrainingSet(1, 69)
-target = trainingArticles[11]
+target = trainingArticles[3]
 print 'Target article title:'
 print target.title
 print '--------------------------------------'
