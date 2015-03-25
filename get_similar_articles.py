@@ -14,7 +14,7 @@ def getSimilarArticles(target, numOfDays, numOfNeighbors):
     count_vect = CountVectorizer(stop_words='english', ngram_range=(1,2))
     tfidf_trans = TfidfTransformer()
     trainingTitle = [x.title for x in articles]
-    trainingLabels = [x.categories for x in articles]
+    trainingLabels = [1 for x in articles]
     targetTitleCounts = count_vect.fit_transform([target.title])
     targetCounts = count_vect.transform([target.text]) + targetTitleCounts
     trainingCounts = count_vect.transform(trainingTitle)
