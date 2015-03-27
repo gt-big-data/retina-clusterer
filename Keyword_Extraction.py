@@ -50,9 +50,6 @@ def getKeywords(texts):
 				wordScores.append(wordTfidf)
 			i = i + 1
 
-		for word, score in zip(keywords,wordScores):
-			print (word, score) # print unigrams and scores
-
 		wordIndex2 = 0
 		bigrams = []
 		bigramScores = []
@@ -62,9 +59,6 @@ def getKeywords(texts):
 				bigrams.append(thisBigram)
 				bigramScores.append(wordTfidf2)
 			wordIndex2 = wordIndex2 + 1
-
-		for word, score in zip(bigrams, bigramScores):
-			print (word, score) # print bigrams and scores
 
 		splitBigrams = []
 		splitBigramTfidf = []
@@ -85,25 +79,17 @@ def getKeywords(texts):
 			else:
 				numBigram[wordSplit[1]] += 1
 
-		print "split bigrams", splitBigrams
-		print "bigram scores", splitBigramTfidf
-		print "num bigram", numBigram
-
 		unigramsAndScores = sorted(zip(wordScores, keywords), reverse=True)
 		unigramSorted = [e[1] for e in unigramsAndScores]
 		unigramTfidfSorted = [e[0] for e in unigramsAndScores]
-		print "unigrams sorted", unigramSorted
-		print "unigram tdidf", unigramTfidfSorted
 
 		#0 bigrams - keep unigram
 		#1 bigram - compare values, keep higher
 		#>1 bigram - keep unigram, keep highest bigram
 		#loop thru unigrams in increasing tfidf value
-
 		for unigram in reversed(unigramSorted): #loop through backwords
 			if unigram in numBigram:
 				if numBigram[unigram] == 1: # unigram appears in 1 bigram
-					print unigram
 					indexUni = unigramSorted.index(unigram)
 					unigramValue = unigramTfidfSorted[indexUni]
 					indexSplitBi = splitBigrams.index(unigram)
@@ -157,11 +143,6 @@ def getKeywords(texts):
 								index = index - 1
 						index = index - 1
 
-		print "updated uni", unigramSorted
-		print "updated uni", unigramTfidfSorted
-		print "updated bi", splitBigrams
-		print "updated bi", splitBigramTfidf
-
 		# Checking for plural words using stemming
 		stemmed = []
 		delList = []
@@ -170,7 +151,8 @@ def getKeywords(texts):
 			try:
 				stemmed.append(stemmer.stem(item))
 			except:
-				print "Not a word, breh"
+				#print "Not a word, breh"
+				pass
 		i = 0
 		for stem in stemmed:
 			j = i
@@ -199,8 +181,6 @@ def getKeywords(texts):
 		keywordTfidf = zip(unigramTfidfSorted, unigramSorted)
 		keywordTfidf.sort(reverse=True) # sort from most relevant to least relevant
 		keywordSorted = [e[1] for e in keywordTfidf]
-		print "FINAL:", keywordSorted
-		print "\n\n"
 
 		keywordList.append(keywordSorted)
 
@@ -217,7 +197,6 @@ def updateLatestArticles():
 	articlesKeywords = getKeywords(articlesTxt)
 	for articleKeywords, articleId in zip(articlesKeywords, articlesId):
 		app.updateKeywords(articleId, articleKeywords)
-
 
 updateLatestArticles()
 
