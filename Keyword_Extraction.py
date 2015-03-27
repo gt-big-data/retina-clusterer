@@ -177,8 +177,8 @@ def getKeywords(texts):
 			while j + 1 < len(stemmed):
 				if stem == stemmed[j + 1]:
 					# pray for no octopus/octopi
-					if len(unigramSorted[i]) < len(unigramSorted[j]):
-						delList.append(j)
+					if len(unigramSorted[i]) < len(unigramSorted[j+1]):
+						delList.append(j+1)
 					else:
 						delList.append(i)
 				j += 1
