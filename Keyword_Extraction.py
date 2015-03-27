@@ -167,12 +167,16 @@ def getKeywords(texts):
 		delList = []
 		stemmer = PorterStemmer()
 		for item in unigramSorted:
-			stemmed.append(stemmer.stem(item))
+			try:
+				stemmed.append(stemmer.stem(item))
+			except:
+				print "Not a word, breh"
 		i = 0
 		for stem in stemmed:
 			j = i
 			while j + 1 < len(stemmed):
 				if stem == stemmed[j + 1]:
+					# pray for no octopus/octopi
 					if len(unigramSorted[i]) < len(unigramSorted[j]):
 						delList.append(j)
 					else:
@@ -181,6 +185,7 @@ def getKeywords(texts):
 			i += 1
 		for index in delList:
 			del(unigramSorted[index])
+			del(unigramTfidfSorted[index])
 
 
 		# Concatenate both lists
