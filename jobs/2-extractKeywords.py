@@ -4,6 +4,7 @@ import numpy as np
 from StringIO import StringIO
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
+from nltk.stem.porter import PorterStemmer
 
 def getKeywords(texts):
 	# Given a list of texts, will extract the keywords for each and return that!
@@ -48,6 +49,7 @@ def getKeywords(texts):
 				keywords.append(thisWord)
 				wordScores.append(wordTfidf)
 			i = i + 1
+
 		wordIndex2 = 0
 		bigrams = []
 		bigramScores = []
@@ -59,29 +61,132 @@ def getKeywords(texts):
 			wordIndex2 = wordIndex2 + 1
 
 		splitBigrams = []
+		splitBigramTfidf = []
+		numBigram = {}
 		for bigram in bigrams:
+			index = bigrams.index(bigram)
 			wordSplit = bigram.split()
 			splitBigrams.append(wordSplit[0])
 			splitBigrams.append(wordSplit[1])
+			splitBigramTfidf.append(bigramScores[index])
+			splitBigramTfidf.append(bigramScores[index])
+			if wordSplit[0] not in numBigram: #add first word in bigram
+				numBigram[wordSplit[0]] = 1
+			else:
+				numBigram[wordSplit[0]] += 1
+			if wordSplit[1] not in numBigram: #add second word in bigram
+				numBigram[wordSplit[1]] = 1
+			else:
+				numBigram[wordSplit[1]] += 1
 
-		for word in splitBigrams: # we remove bigram words from potential unigrams
-			if word in keywords:
-				index = keywords.index(word)
-				keywords.pop(index)
-				wordScores.pop(index)
+		unigramsAndScores = sorted(zip(wordScores, keywords), reverse=True)
+		unigramSorted = [e[1] for e in unigramsAndScores]
+		unigramTfidfSorted = [e[0] for e in unigramsAndScores]
+
+		#0 bigrams - keep unigram
+		#1 bigram - compare values, keep higher
+		#>1 bigram - keep unigram, keep highest bigram
+		#loop thru unigrams in increasing tfidf value
+		for unigram in reversed(unigramSorted): #loop through backwords
+			if unigram in numBigram:
+				if numBigram[unigram] == 1: # unigram appears in 1 bigram
+					indexUni = unigramSorted.index(unigram)
+					unigramValue = unigramTfidfSorted[indexUni]
+					indexSplitBi = splitBigrams.index(unigram)
+					bigramValue = splitBigramTfidf[indexSplitBi]
+					if unigramValue > bigramValue:
+						# delete both words of bigram
+						if indexSplitBi % 2 == 0: # unigram is first word in the split
+							splitBigrams.pop(indexSplitBi)
+							splitBigramTfidf.pop(indexSplitBi)
+							# if other word is also in bigram, update bigram numbers
+							if splitBigrams[indexSplitBi] in numBigram:
+								numBigram[splitBigrams[indexSplitBi]] -=1
+							splitBigrams.pop(indexSplitBi)
+							splitBigramTfidf.pop(indexSplitBi)
+						else: # unigram is second word in the split
+							splitBigrams.pop(indexSplitBi)
+							splitBigramTfidf.pop(indexSplitBi)
+							# if the other word is also in bigram, update bigram numbers
+							if splitBigrams[indexSplitBi - 1] in numBigram:
+								numBigram[splitBigrams[indexSplitBi - 1]] -= 1
+							splitBigrams.pop(indexSplitBi - 1)
+							splitBigramTfidf.pop(indexSplitBi - 1)
+					else:
+						# delete unigram
+						unigramSorted.pop(indexUni)
+						unigramTfidfSorted.pop(indexUni)
+				elif numBigram[unigram] > 1: # unigram appears in more than 1 bigram
+					highestValue = 0
+					for index in range(len(splitBigrams)): #find value of highest bigram
+						if splitBigrams[index] == unigram and splitBigramTfidf[index] > highestValue:
+							highestValue = splitBigramTfidf[index]
+					index = len(splitBigrams) - 1
+					while (index >= 0): # loop through index and delete bigrams
+						if splitBigrams[index] == unigram and splitBigramTfidf[index] < highestValue:
+							if index % 2 == 0: # unigram is first word in the split
+								splitBigrams.pop(index)
+								splitBigramTfidf.pop(index)
+								# if other word is also in bigram, update bigram numbers
+								if splitBigrams[index] in numBigram:
+									numBigram[splitBigrams[index]] -= 1
+								splitBigrams.pop(index)
+								splitBigramTfidf.pop(index)
+							else: # unigram is second word in the split
+								splitBigrams.pop(index)
+								splitBigramTfidf.pop(index)
+								# if other word is also in bigram, update bigram numbers
+								if splitBigrams[index - 1] in numBigram:
+									numBigram[splitBigrams[index - 1]] -= 1
+								splitBigrams.pop(index - 1)
+								splitBigramTfidf.pop(index - 1)
+								index = index - 1
+						index = index - 1
+
+		# Checking for plural words using stemming
+		stemmed = []
+		delList = []
+		stemmer = PorterStemmer()
+		for item in unigramSorted:
+			try:
+				stemmed.append(stemmer.stem(item))
+			except:
+				#print "Not a word, breh"
+				pass
+		i = 0
+		for stem in stemmed:
+			j = i
+			while j + 1 < len(stemmed):
+				if stem == stemmed[j + 1]:
+					# pray for no octopus/octopi
+					if len(unigramSorted[i]) < len(unigramSorted[j+1]):
+						delList.append(j+1)
+					else:
+						delList.append(i)
+				j += 1
+			i += 1
+		for index in delList:
+			del(unigramSorted[index])
+			del(unigramTfidfSorted[index])
+
 
 		# Concatenate both lists
-		keywords = keywords + bigrams 
-		wordScores = wordScores + bigramScores
+		for index in range(len(splitBigrams)):
+			if (index % 2 == 0):
+				word = "".join([splitBigrams[index], " ", splitBigrams[index + 1]])
+				unigramSorted.append(word)
+				value = splitBigramTfidf[index]
+				unigramTfidfSorted.append(value)
 
-		keyWordTfidf = zip(wordScores, keywords)
-		keyWordTfidf.sort(reverse=True) # sort from most relevant to least relevant
-		keyWordSorted = [keyword for score, keyword in keyWordTfidf]
-		
-		keywordList.append(keyWordSorted)
+		keywordTfidf = zip(unigramTfidfSorted, unigramSorted)
+		keywordTfidf.sort(reverse=True) # sort from most relevant to least relevant
+		keywordSorted = [e[1] for e in keywordTfidf]
+
+		keywordList.append(keywordSorted)
 
 		articleIndex = articleIndex + 1
 	return keywordList
+
 
 def updateLatestArticles():
 	# This will get the latest 30 articles without keywords
@@ -92,7 +197,6 @@ def updateLatestArticles():
 	articlesKeywords = getKeywords(articlesTxt)
 	for articleKeywords, articleId in zip(articlesKeywords, articlesId):
 		app.updateKeywords(articleId, articleKeywords)
-
 
 updateLatestArticles()
 
