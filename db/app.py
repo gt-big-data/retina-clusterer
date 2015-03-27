@@ -10,7 +10,7 @@ from collections import namedtuple
 client = MongoClient('mongodb://146.148.59.202:27017/')
 db = client['big_data']
 
-Article = namedtuple('Article', ['title', 'text', 'category', 'clusterDate', 'id', 'keywords']) # This used with getLatestCluster(limit = 0)
+Article = namedtuple('Article', ['title', 'text', 'category', 'clusterDate', 'id', 'keywords'])
 
 def getArticlesByTimeStamp(timeStamp, limit=1000):
     timeObj = datetime.utcfromtimestamp(timeStamp);
@@ -55,18 +55,12 @@ def deleteFromCluster(articleIDs, clusterName):
     db.clusters.update( { "clusterName": clusterName }, { "$pull": { "articles": {'$in': articleIDs} } } )
 
 def getLatestCluster(clusterName, limit = 50, skip=0):
-    cluster = db.clusters.find_one({ "clusterName": clusterName })
     if limit == 0: # If limit is 0, get ALL articles.
         limit = getClusterArticleCount(clusterName);
-    if cluster['articles'] is None:
-        return {
-            "error": "Error: No " + clusterName + " cluster found."
-        }
-    articles = db.articles.find ( { "$query": { "_id":  { "$in": cluster["articles"] } }, "$orderby": { 'recent_download_date' : -1 } } ).skip(skip).limit(limit)
-
+    articles = db.cleanarticles.find({ "$query": { "category":  clusterName }, "$orderby": { 'download_time' : -1 } }).skip(skip).limit(limit)
     clean_articles = []
     for article in articles:
-        clean_articles.append(Article(article['title'], article['text'], clusterName, article['recent_download_date'], article['_id'], []))
+        clean_articles.append(Article(article['title'], article['text'], clusterName, article['download_time'], article['_id'], []))
     return clean_articles
 
 def getTrainingSet(limit = 50, skip=0):
