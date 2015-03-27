@@ -4,6 +4,7 @@ import numpy as np
 from StringIO import StringIO
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
+from nltk.stem.porter import PorterStemmer
 
 def getKeywords(texts):
 	# Given a list of texts, will extract the keywords for each and return that!
@@ -160,6 +161,27 @@ def getKeywords(texts):
 		print "updated uni", unigramTfidfSorted
 		print "updated bi", splitBigrams
 		print "updated bi", splitBigramTfidf
+
+		# Checking for plural words using stemming
+		stemmed = []
+		delList = []
+		stemmer = PorterStemmer()
+		for item in unigramSorted:
+			stemmed.append(stemmer.stem(item))
+		i = 0
+		for stem in stemmed:
+			j = i
+			while j + 1 < len(stemmed):
+				if stem == stemmed[j + 1]:
+					if len(unigramSorted[i]) < len(unigramSorted[j]):
+						delList.append(j)
+					else:
+						delList.append(i)
+				j += 1
+			i += 1
+		for index in delList:
+			del(unigramSorted[index])
+
 
 		# Concatenate both lists
 		for index in range(len(splitBigrams)):
