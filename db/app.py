@@ -27,6 +27,16 @@ def getArticlesByTimeStamp(timeStamp, limit=1000):
 def getArticlesInLastNDays(n=10, limit=1000):
     return getArticlesByTimeStamp(time.time() - n*24*3600, limit)
 
+def getNbArticlesInXDays(days=60):
+    return db.cleanarticles.find({'download_time': {'$gte': datetime.utcfromtimestamp(time.time() - days*24*3600)}}).count()
+
+def getArticlesBetweenTimes(time1=0, time2=1):
+    articles = db.cleanarticles.find({'$and': [{'download_time': {'$gte': datetime.utcfromtimestamp(time1)}}, {'download_time': {'$lte': datetime.utcfromtimestamp(time2)}}]})
+    clean_articles = []
+    for article in articles:
+        clean_articles.append(Article(article['title'], article['text'], article['category'], article['download_time'], article['_id'], article['keywords']))
+    return clean_articles    
+
 def getCrawlerVersion():
     # Get current version of crawler
     query = {"_id" : "version"}
@@ -60,7 +70,7 @@ def getLatestCluster(clusterName, limit = 50, skip=0):
     articles = db.cleanarticles.find({ "$query": { "category":  clusterName }, "$orderby": { 'download_time' : -1 } }).skip(skip).limit(limit)
     clean_articles = []
     for article in articles:
-        clean_articles.append(Article(article['title'], article['text'], clusterName, article['download_time'], article['_id'], []))
+        clean_articles.append(Article(article['title'], article['text'], clusterName, article['download_time'], article['_id'], article['keywords']))
     return clean_articles
 
 def getTrainingSet(limit = 50, skip=0):
