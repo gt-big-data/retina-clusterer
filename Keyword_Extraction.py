@@ -1,81 +1,209 @@
-# -*- coding: utf-8 -*-
-import time
 from db import app
 import numpy as np
 
 from StringIO import StringIO
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
+from nltk.stem.porter import PorterStemmer
 
-count_vect1 = CountVectorizer(stop_words='english', ngram_range=(1,1))
-count_vect2 = CountVectorizer(stop_words='english', ngram_range=(2,2))
+def getKeywords(texts):
+	# Given a list of texts, will extract the keywords for each and return that!
+	# NOTICE: Don't send more than 100 articles at a time, as we can't insure heterogeneity
 
-tfidf_trans1 = TfidfTransformer()
-tfidf_trans2 = TfidfTransformer()
+	count_vectUni = CountVectorizer(stop_words='english', ngram_range=(1,1)) # for unigrams
+	count_vectBi = CountVectorizer(stop_words='english', ngram_range=(2,2)) # for bigrams
 
-trainingArticles = app.getTrainingSet(50, 0)
-trainingTitle = [x.title for x in trainingArticles]
-trainingText = [x.text for x in trainingArticles]
+	tfidf_trans1 = TfidfTransformer()
+	tfidf_trans2 = TfidfTransformer()
 
-trainingCounts1 = count_vect1.fit_transform(trainingText)
-trainingCounts2 = count_vect2.fit_transform(trainingText)
-trainingTfidf1 = tfidf_trans1.fit_transform(trainingCounts1)
-trainingTfidf2 = tfidf_trans2.fit_transform(trainingCounts2)
+	trainingArticles = app.getTrainingSet(50, 20) # get a training set to mix up the TfIdf
+	trainingText = [x.text for x in trainingArticles]
 
-vocab1 = count_vect1.vocabulary_
-vocabValue1=vocab1.keys()
-vocabIndex1=vocab1.values()
-vocab2 = count_vect2.vocabulary_
-vocabValue2=vocab2.keys()
-vocabIndex2=vocab2.values()
+	totalText = trainingText + texts # merge
+
+	# training unigram and bigram TFIDF
+	trainingTfidf1 = tfidf_trans1.fit_transform(count_vectUni.fit_transform(totalText))
+	trainingTfidf2 = tfidf_trans2.fit_transform(count_vectBi.fit_transform(totalText))
+
+	# extract vocab value and index. This helps link column to a word ( 13 = 'banana')
+	vocabValue1 = count_vectUni.vocabulary_.keys()
+	vocabIndex1 = count_vectUni.vocabulary_.values()
+	vocabValue2 = count_vectBi.vocabulary_.keys()
+	vocabIndex2 = count_vectBi.vocabulary_.values()
+
+	tfidfArray1 = trainingTfidf1.toarray()
+	tfidfArray2 = trainingTfidf2.toarray()
+
+	keywordList = [] # prepare for output
+
+	articleIndex = len(trainingText)
+	while articleIndex < len(totalText):
+		thisTfidfUni = tfidfArray1[articleIndex]
+		thisTfidfBi = tfidfArray2[articleIndex]
+		i = 0
+		keywords = []
+		wordScores = []
+		for wordTfidf in thisTfidfUni:
+			if wordTfidf > 0.15:
+				thisWord = vocabValue1[vocabIndex1.index(i)].encode('utf-8')
+				keywords.append(thisWord)
+				wordScores.append(wordTfidf)
+			i = i + 1
+
+		wordIndex2 = 0
+		bigrams = []
+		bigramScores = []
+		for wordTfidf2 in thisTfidfBi:
+			if wordTfidf2 > 0.15:
+				thisBigram = vocabValue2[vocabIndex2.index(wordIndex2)].encode('utf-8')
+				bigrams.append(thisBigram)
+				bigramScores.append(wordTfidf2)
+			wordIndex2 = wordIndex2 + 1
+
+		splitBigrams = []
+		splitBigramTfidf = []
+		numBigram = {}
+		for bigram in bigrams:
+			index = bigrams.index(bigram)
+			wordSplit = bigram.split()
+			splitBigrams.append(wordSplit[0])
+			splitBigrams.append(wordSplit[1])
+			splitBigramTfidf.append(bigramScores[index])
+			splitBigramTfidf.append(bigramScores[index])
+			if wordSplit[0] not in numBigram: #add first word in bigram
+				numBigram[wordSplit[0]] = 1
+			else:
+				numBigram[wordSplit[0]] += 1
+			if wordSplit[1] not in numBigram: #add second word in bigram
+				numBigram[wordSplit[1]] = 1
+			else:
+				numBigram[wordSplit[1]] += 1
+
+		unigramsAndScores = sorted(zip(wordScores, keywords), reverse=True)
+		unigramSorted = [e[1] for e in unigramsAndScores]
+		unigramTfidfSorted = [e[0] for e in unigramsAndScores]
+
+		#0 bigrams - keep unigram
+		#1 bigram - compare values, keep higher
+		#>1 bigram - keep unigram, keep highest bigram
+		#loop thru unigrams in increasing tfidf value
+		for unigram in reversed(unigramSorted): #loop through backwords
+			if unigram in numBigram:
+				if numBigram[unigram] == 1: # unigram appears in 1 bigram
+					indexUni = unigramSorted.index(unigram)
+					unigramValue = unigramTfidfSorted[indexUni]
+					indexSplitBi = splitBigrams.index(unigram)
+					bigramValue = splitBigramTfidf[indexSplitBi]
+					if unigramValue > bigramValue:
+						# delete both words of bigram
+						if indexSplitBi % 2 == 0: # unigram is first word in the split
+							splitBigrams.pop(indexSplitBi)
+							splitBigramTfidf.pop(indexSplitBi)
+							# if other word is also in bigram, update bigram numbers
+							if splitBigrams[indexSplitBi] in numBigram:
+								numBigram[splitBigrams[indexSplitBi]] -=1
+							splitBigrams.pop(indexSplitBi)
+							splitBigramTfidf.pop(indexSplitBi)
+						else: # unigram is second word in the split
+							splitBigrams.pop(indexSplitBi)
+							splitBigramTfidf.pop(indexSplitBi)
+							# if the other word is also in bigram, update bigram numbers
+							if splitBigrams[indexSplitBi - 1] in numBigram:
+								numBigram[splitBigrams[indexSplitBi - 1]] -= 1
+							splitBigrams.pop(indexSplitBi - 1)
+							splitBigramTfidf.pop(indexSplitBi - 1)
+					else:
+						# delete unigram
+						unigramSorted.pop(indexUni)
+						unigramTfidfSorted.pop(indexUni)
+				elif numBigram[unigram] > 1: # unigram appears in more than 1 bigram
+					highestValue = 0
+					for index in range(len(splitBigrams)): #find value of highest bigram
+						if splitBigrams[index] == unigram and splitBigramTfidf[index] > highestValue:
+							highestValue = splitBigramTfidf[index]
+					index = len(splitBigrams) - 1
+					while (index >= 0): # loop through index and delete bigrams
+						if splitBigrams[index] == unigram and splitBigramTfidf[index] < highestValue:
+							if index % 2 == 0: # unigram is first word in the split
+								splitBigrams.pop(index)
+								splitBigramTfidf.pop(index)
+								# if other word is also in bigram, update bigram numbers
+								if splitBigrams[index] in numBigram:
+									numBigram[splitBigrams[index]] -= 1
+								splitBigrams.pop(index)
+								splitBigramTfidf.pop(index)
+							else: # unigram is second word in the split
+								splitBigrams.pop(index)
+								splitBigramTfidf.pop(index)
+								# if other word is also in bigram, update bigram numbers
+								if splitBigrams[index - 1] in numBigram:
+									numBigram[splitBigrams[index - 1]] -= 1
+								splitBigrams.pop(index - 1)
+								splitBigramTfidf.pop(index - 1)
+								index = index - 1
+						index = index - 1
+
+		# Checking for plural words using stemming
+		stemmed = []
+		delList = []
+		stemmer = PorterStemmer()
+		for item in unigramSorted:
+			try:
+				stemmed.append(stemmer.stem(item))
+			except:
+				#print "Not a word, breh"
+				pass
+		i = 0
+		for stem in stemmed:
+			j = i
+			while j + 1 < len(stemmed):
+				if stem == stemmed[j + 1]:
+					# pray for no octopus/octopi
+					if len(unigramSorted[i]) < len(unigramSorted[j+1]):
+						delList.append(j+1)
+					else:
+						delList.append(i)
+				j += 1
+			i += 1
+		for index in delList:
+			del(unigramSorted[index])
+			del(unigramTfidfSorted[index])
 
 
-tfidfArray1 = trainingTfidf1.toarray()
-tfidfArray2 = trainingTfidf2.toarray()
+		# Concatenate both lists
+		for index in range(len(splitBigrams)):
+			if (index % 2 == 0):
+				word = "".join([splitBigrams[index], " ", splitBigrams[index + 1]])
+				unigramSorted.append(word)
+				value = splitBigramTfidf[index]
+				unigramTfidfSorted.append(value)
 
-articleCount = 0
+		keywordTfidf = zip(unigramTfidfSorted, unigramSorted)
+		keywordTfidf.sort(reverse=True) # sort from most relevant to least relevant
+		keywordSorted = [e[1] for e in keywordTfidf]
 
-while articleCount < 10:
-	article1 = tfidfArray1[articleCount]
-	article2 = tfidfArray2[articleCount]
-	wordIndex1 = 0
-	myKeyword1 = []
-	myTfidf1 = []
-	for wordTfidf1 in article1:
-		if wordTfidf1 > 0.15:
-			thisWord = vocabValue1[vocabIndex1.index(wordIndex1)]
-			myKeyword1.append(thisWord.encode('utf-8'))
-			myTfidf1.append(wordTfidf1)
-			#print (thisWord, " ", wordTfidf1)
-		wordIndex1 = wordIndex1 + 1
-	#print trainingTitle[articleCount].encode('utf-8'), ": {", ", ".join(myKeyword1) ,"}\n"
-	wordIndex2 = 0
-	myKeyword2 = []
-	myTfidf2 = []
-	for wordTfidf2 in article2:
-		if wordTfidf2 > 0.15:
-			thisWord = vocabValue2[vocabIndex2.index(wordIndex2)]
-			myKeyword2.append(thisWord.encode('utf-8', errors='replace'))
-			myTfidf2.append(wordTfidf2)
-		wordIndex2 = wordIndex2 + 1
-	splitBigrams = []
-	for bigram in myKeyword2:
-		wordSplit = bigram.split()
-		splitBigrams.append(wordSplit[0])
-		splitBigrams.append(wordSplit[1])
-	for word in splitBigrams:
-		if word in myKeyword1:
-			index = myKeyword1.index(word)
-			myKeyword1.pop(index)
-			myTfidf1.pop(index)
-	for bigram in myKeyword2:
-		myKeyword1.append(bigram)
-	for tfidf in myTfidf2:
-		myTfidf1.append(tfidf)
-	keyWordTfidf = zip(myTfidf1, myKeyword1)
-	keyWordTfidf.sort(reverse=True)
-	keyWordSorted = [keyword for tfidf, keyword in keyWordTfidf]
-	print trainingTitle[articleCount]
-	print keyWordSorted
-	print "\n"
-	articleCount = articleCount + 1
+		keywordList.append(keywordSorted)
+
+		articleIndex = articleIndex + 1
+	return keywordList
+
+
+def updateLatestArticles():
+	# This will get the latest 30 articles without keywords
+	# Produce a keyword list, and upload to Database
+	articles = app.getArticlesNoKeywords(30)
+	articlesTxt = [article.text for article in articles]
+	articlesId = [article.id for article in articles]
+	articlesKeywords = getKeywords(articlesTxt)
+	for articleKeywords, articleId in zip(articlesKeywords, articlesId):
+		app.updateKeywords(articleId, articleKeywords)
+
+updateLatestArticles()
+
+# articles = app.getLatestCluster('Technology', 10, 0)
+# articlesTitle = [article.title for article in articles]
+# articlesTxt = [article.text for article in articles]
+# articlesKeywords = getKeywords(articlesTxt)
+
+# for articleKeywords, articleTitle in zip(articlesKeywords, articlesTitle):
+# 	print articleTitle.encode('utf-8'), "\n ---------------------------------\n", articleKeywords, "\n\n"
