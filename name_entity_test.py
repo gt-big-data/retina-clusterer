@@ -20,4 +20,5 @@ for sentence in chunked_sentences:
                 entity += tupleNNP[0]
             entity = entity[1:]
             nameEntity.append(entity) #add entity to list
+nameEntity = list(set(nameEntity))
 print nameEntity
