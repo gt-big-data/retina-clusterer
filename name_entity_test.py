@@ -1,24 +1,26 @@
 import nltk
+from db import app
 
-#with open('Test_Articles/Fairly bad pitcher traps triumph in the end.txt', 'r') as f:
-with open('Test_Articles/American held by ISIS.txt', 'r') as f:
-    sample = f.read()
+def getNameEntities(text):
+    sentences = nltk.sent_tokenize(text)
+    tokenized_sentences = [nltk.word_tokenize(sentence) for sentence in sentences]
+    tagged_sentences = [nltk.pos_tag(sentence) for sentence in tokenized_sentences]
+    chunked_sentences = nltk.ne_chunk_sents(tagged_sentences, binary=True)
 
-sentences = nltk.sent_tokenize(sample.encode('utf-8')) #seperate into sentences
-tokenized_sentences = [nltk.word_tokenize(sentence) for sentence in sentences] #seperate into words
-tagged_sentences = [nltk.pos_tag(sentence) for sentence in tokenized_sentences] #add part of speech to each word
-chunked_sentences = nltk.ne_chunk_sents(tagged_sentences, binary=True) #turn list into tree
+    nameEntity = []
+    for sentence in chunked_sentences:
+        for part in sentence:
+            if type(part) is nltk.Tree:
+                listPN = part.leaves()
+                entity = ""
+                for tuplePN in listPN:
+                    entity += " "
+                    entity += tuplePN[0]
+                entity = entity[1:]
+                nameEntity.append(entity)
+    nameEntity = list(set(nameEntity))
+    return nameEntity
 
-nameEntity = []
-for sentence in chunked_sentences:
-    for part in sentence: #part is tuple or tree
-        if type(part) is nltk.Tree: #name entities are only in trees
-            listNNP = part.leaves()
-            entity = ""
-            for tupleNNP in listNNP: #turn tree into entity
-                entity += " "
-                entity += tupleNNP[0]
-            entity = entity[1:]
-            nameEntity.append(entity) #add entity to list
-nameEntity = list(set(nameEntity))
-print nameEntity
+articles = app.getLatestCleanArticles(5)
+articleNumber = 2
+print articles[articleNumber][0], "\n\n", getNameEntities(articles[articleNumber][1])
