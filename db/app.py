@@ -136,9 +136,6 @@ def insertCleanArticles(articles):
             data = { "_id": article.id, "title": article.title, "text": article.text, "download_time": article.clusterDate, "category": article.categories, "keywords": [] }
             jsonArticle = json.dumps(data)
             jsonArticles.append(jsonArticle)
-            # NOTE! MIGHT BE INCORRECT! TRY...
-            # data = { ... }               # as written in code
-            # jsonArticles.append(data)    # effectively removing ln 131
     try:
         db.cleanarticles.insert(jsonArticles)
     except :
