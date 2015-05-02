@@ -8,6 +8,7 @@ from collections import defaultdict
 from sklearn.naive_bayes import MultinomialNB
 from ..supervisedTest import static_classifier_test
 from bson.objectid import ObjectId
+from sklearn.svm import SVC
 
 # This function should be ran every 4 hours in the future (!)
 new_articles = app.getArticlesByTimeStamp(time.time() - 4 * 3600) # last four hours
@@ -35,6 +36,10 @@ for new_cat, article in zip(predicted_labels, unlabeled_articles):
         app.insertCleanArticle(Article(article.title, article.text, new_cat, article.clusterDate, article.id, []))
     else:
         print article
+
+clf = SVC(kernel = 'linear').fit(trainingTfidf, trainingLabels) # train classifier
+return clf.predict(testTfidf)
+
 
 # append to the database in clusters (old)
 for cleanCategory in cleanCategoriesDict.keys():

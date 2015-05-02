@@ -166,8 +166,10 @@ def getKeywords(texts):
 				j += 1
 			i += 1
 		for index in delList:
-			del(unigramSorted[index])
-			del(unigramTfidfSorted[index])
+			if index in unigramSorted:
+				del(unigramSorted[index])
+			if index in unigramTfidfSorted:
+				del(unigramTfidfSorted[index])
 
 
 		# Concatenate both lists
