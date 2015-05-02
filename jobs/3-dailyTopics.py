@@ -39,5 +39,5 @@ def generateGraphForDay(daysAgo):
 	date2 = datetime.utcfromtimestamp(time2)
 	app.db.graph_topics.update({'$and': [{'date': {'$gte': datetime.utcfromtimestamp(time1)}}, {'date': {'$lte': datetime.utcfromtimestamp(time2)}}]}, {'$set': {'date': datetime.utcfromtimestamp(endTime), 'graph': {'nodes': nodesClean, 'edges': edgesClean}}}, upsert=True)
 
-for u in range(3,10):
+for u in range(7,20):
 	generateGraphForDay(u)
