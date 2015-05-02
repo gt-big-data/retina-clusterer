@@ -30,7 +30,7 @@ def generateGraphForDay(daysAgo):
 	memberships = coloring.membership
 
 	for i, membership in zip(range(0,len(articles)-1), memberships):
-		nodesClean.append({"id": articles[i].id, "name": articles[i].title.encode('utf-8').replace('"', ''), "group": str(membership)});
+		nodesClean.append({"id": articles[i].id, "name": articles[i].title.encode('utf-8').replace('"', ''), "group": str(membership), "keywords": articles[i].keywords[:5].join(';')});
 
 	endDate = datetime.utcfromtimestamp(endTime)
 	date1 = datetime(endDate.year, endDate.month, endDate.day)
@@ -39,5 +39,5 @@ def generateGraphForDay(daysAgo):
 	date2 = datetime.utcfromtimestamp(time2)
 	app.db.graph_topics.update({'$and': [{'date': {'$gte': datetime.utcfromtimestamp(time1)}}, {'date': {'$lte': datetime.utcfromtimestamp(time2)}}]}, {'$set': {'date': datetime.utcfromtimestamp(endTime), 'graph': {'nodes': nodesClean, 'edges': edgesClean}}}, upsert=True)
 
-for u in range(7,20):
+for u in range(3,30):
 	generateGraphForDay(u)
