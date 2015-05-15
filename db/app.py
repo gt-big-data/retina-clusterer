@@ -62,7 +62,7 @@ def getLatestCluster(clusterName, limit = 50, skip=0):
         img = ''
         if 'img' in article:
             img = article['img']
-        clean_articles.append(Article(article['title'], article['text'], clusterName, article['download_time'], article['_id'], article['keywords'], article['img']))
+        clean_articles.append(Article(article['title'], article['text'], clusterName, article['download_time'], article['_id'], article['keywords'], img))
     return clean_articles
 
 def getTrainingSet(limit = 50, skip=0):
