@@ -10,7 +10,7 @@ from ..supervisedTest import static_classifier_test
 from bson.objectid import ObjectId
 from sklearn.svm import SVC
 
-new_articles = app.getArticlesByTimeStamp((time.time() - 304 * 3600), 2500) # last four hours
+new_articles = app.getArticlesByTimeStamp(time.time() - 4 * 3600) # last four hours
 print len(new_articles)
 unlabeled_articles = [];
 unlabeled_texts = [];
