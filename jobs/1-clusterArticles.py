@@ -10,9 +10,8 @@ from ..supervisedTest import static_classifier_test
 from bson.objectid import ObjectId
 from sklearn.svm import SVC
 
-# This function should be ran every 4 hours in the future (!)
-new_articles = app.getArticlesByTimeStamp(time.time() - 4 * 3600) # last four hours
-
+new_articles = app.getArticlesByTimeStamp((time.time() - 304 * 3600), 2500) # last four hours
+print len(new_articles)
 unlabeled_articles = [];
 unlabeled_texts = [];
 
@@ -36,15 +35,3 @@ for new_cat, article in zip(predicted_labels, unlabeled_articles):
         app.insertCleanArticle(Article(article.title, article.text, new_cat, article.clusterDate, article.id, [], article.img))
     else:
         print article
-
-clf = SVC(kernel = 'linear').fit(trainingTfidf, trainingLabels) # train classifier
-return clf.predict(testTfidf)
-
-
-# append to the database in clusters (old)
-for cleanCategory in cleanCategoriesDict.keys():
-    articleIDs = cleanCategoriesDict[cleanCategory]
-    if not all(type(_id) == ObjectId for _id in articleIDs):
-        print articleIDs
-    else:
-        app.insertToCluster(articleIDs, cleanCategory) # append to our new table

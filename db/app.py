@@ -1,8 +1,6 @@
 from pymongo import MongoClient, errors
 from bson.objectid import ObjectId
 import time
-import hashlib
-import md5
 import json
 from datetime import datetime, date, timedelta
 from collections import namedtuple
@@ -13,18 +11,17 @@ db = client['big_data']
 Article = namedtuple('Article', ['title', 'text', 'category', 'clusterDate', 'id', 'keywords', 'img'])
 
 def getArticlesByTimeStamp(timeStamp, limit=1000):
-    timeObj = datetime.utcfromtimestamp(timeStamp);
-    version = getCrawlerVersion()
-    articles = db.articles.find({'$and': [{"v": version}, {"text": {'$ne': ''}}, {"title": {'$ne': ''}}, {"recent_download_date": {"$gte":  timeObj}}]}).limit(limit);
+    timeObj = datetime.utcfromtimestamp(timeStamp)
+    articles = db.qdoc.find({'$and': [{"content": {'$ne': ''}}, {"title": {'$ne': ''}}, {"timestamp": {"$gte":  timeStamp}}]}).limit(limit);
     returnObject = [];
     for article in articles:
         cat = ''
-        if article['categories'] is not None:
-            cat = article['categories'][0];
+        if 'categories' in article:
+            cat = article['categories']
         img = ''
-        if len(article['images']) > 0:
-            img = article['images'][0]
-        returnObject.append(Article(article['title'], article['text'], cat, article['recent_download_date'], article['_id'], [], img)) # this is old categories, be careful
+        if article['img'] is not None:
+            img = article['img']
+        returnObject.append(Article(article['title'], article['content'], cat, datetime.utcfromtimestamp(article['timestamp']), article['_id'], [], img)) # this is old categories, be careful
     return returnObject
 
 def getArticlesInLastNDays(n=10, limit=1000):
@@ -56,18 +53,6 @@ def getArticleClusterList():
 
     return clusterNameArray
 
-def createCluster(clusterName, articleIds):
-    db.clusters.insert( { "clusterName": clusterName, "_id": hashlib.md5(clusterName).hexdigest(), "articles": articleIds } )
-
-def deleteCluster(clusterName):
-    db.clusters.remove( { "clusterName": clusterName })
-
-def insertToCluster(articleIDs, clusterName): # articleIDs is an array
-    db.clusters.update( { "clusterName": clusterName }, { "$addToSet": { "articles": {'$each': articleIDs} } } )
-
-def deleteFromCluster(articleIDs, clusterName):
-    db.clusters.update( { "clusterName": clusterName }, { "$pull": { "articles": {'$in': articleIDs} } } )
-
 def getLatestCluster(clusterName, limit = 50, skip=0):
     if limit == 0: # If limit is 0, get ALL articles.
         limit = getClusterArticleCount(clusterName);
@@ -94,12 +79,6 @@ def getTrainingSet(limit = 50, skip=0):
 
 def getClusterArticleCount(clusterName):
     return db.cleanarticles.find({'category': clusterName}).count()
-
-def getArticleCluster(articleID):
-    clusterList = getArticleClusterList()
-    cursor = db.clusters.find({"articles": ObjectId(articleID)}, {"clusterName": 1, "_id":0})
-    for cluster in cursor:
-        return cluster.get("clusterName")
 
 def insertCleanArticle(article):
     if (article.title == '') | (article.title is None):
