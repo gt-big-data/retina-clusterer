@@ -23,14 +23,14 @@ def generateGraphForDay(daysAgo):
 		for j in range(i+1, len(articles)-1):
 			commonKeywords = list(set(articles[i].keywords).intersection(articles[j].keywords))
 			if len(commonKeywords) > 1:
-				edgesClean.append({"source": i, "target": j, "value": len(commonKeywords)})
+				edgesClean.append({"source": articles[i].id, "target": articles[j].id, "value": len(commonKeywords)})
 				g.add_edges([(i, j)])
 
 	coloring = g.community_infomap()
 	memberships = coloring.membership
 
 	for i, membership in zip(range(0,len(articles)-1), memberships):
-		nodesClean.append({"id": i, "name": articles[i].title.encode('utf-8').replace('"', ''), "group": str(membership), "keywords": articles[i].keywords[:5], "img": ''})
+		nodesClean.append({"id": articles[i].id, "name": articles[i].title.encode('utf-8').replace('"', ''), "group": str(membership), "keywords": articles[i].keywords[:5], "img": ''})
 		#articles[i].img
 
 	endDate = datetime.utcfromtimestamp(endTime)
