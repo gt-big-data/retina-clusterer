@@ -9,8 +9,8 @@ from dateutil import tz
 from igraph import *
 
 def generateGraphForDay(daysAgo):
-	beginTime = time.time() - daysAgo*24*3600
-	endTime = beginTime + 3*24*3600
+	endTime = time.time() - daysAgo*24*3600
+	beginTime = endTime - 1.5*24*3600
 	articles = app.getArticlesBetweenTimes(beginTime, endTime)
 
 	i = 0
@@ -39,5 +39,5 @@ def generateGraphForDay(daysAgo):
 	date2 = datetime.utcfromtimestamp(time2)
 	app.db.graph_topics.update({'$and': [{'date': {'$gte': datetime.utcfromtimestamp(time1)}}, {'date': {'$lte': datetime.utcfromtimestamp(time2)}}]}, {'$set': {'date': datetime.utcfromtimestamp(endTime), 'graph': {'nodes': nodesClean, 'edges': edgesClean}}}, upsert=True)
 
-for u in range(3,30):
+for u in range(0,30):
 	generateGraphForDay(u)
