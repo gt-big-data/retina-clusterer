@@ -32,17 +32,20 @@ def getArticlesInLastNDays(n=10, limit=1000):
     return getArticlesByTimeStamp(time.time() - n*24*3600, limit)
 
 def getNbArticlesInXDays(days=60):
-    return db.qdoc.find({'timestamp': {'$gte': datetime.utcfromtimestamp(time.time() - days*24*3600)}}).count()
+    return db.qdoc.find({'timestamp': {'$gte': (time.time() - days*24*3600)}}).count()
 
-def getArticlesBetweenTimes(time1=0, time2=1):
-    articles = db.cleanarticles.find({'$and': [{'download_time': {'$gte': datetime.utcfromtimestamp(time1)}}, {'download_time': {'$lte': datetime.utcfromtimestamp(time2)}}]})
+def getArticlesBetweenTimes(time1, time2):
+    articles = db.qdoc.find({'$and': [{'timestamp': {'$gte': time1}}, {'timestamp': {'$lte': time2}}]})
     clean_articles = []
     for article in articles:
         img = ''
         if 'img' in article:
             img = article['img']
-        clean_articles.append(Article(article['title'], article['text'], article['category'], article['download_time'], article['_id'], article['keywords'], img))
-    return clean_articles    
+        category = ''
+        if 'category' in article:
+            category = article['category']
+        clean_articles.append(Article(article['title'], article['content'], category, article['timestamp'], article['_id'], article['keywords'], img))
+    return clean_articles
 
 def getCrawlerVersion():
     doc = db.articles.find_one({"_id" : "version"})
