@@ -30,7 +30,7 @@ def generateGraphForDay(daysAgo):
 	memberships = coloring.membership
 
 	for i, membership in zip(range(0,len(articles)-1), memberships):
-		nodesClean.append({"id": articles[i].id, "name": articles[i].title.encode('utf-8').replace('"', ''), "group": str(membership), "keywords": articles[i].keywords[:5], "img": ''})
+		nodesClean.append({"id": articles[i].id, "name": articles[i].title.encode('utf-8').replace('"', ''), "group": str(membership), "keywords": articles[i].keywords[:5], "img": '', 'source': articles[i].source})
 		#articles[i].img
 
 	endDate = datetime.utcfromtimestamp(endTime)
