@@ -44,7 +44,6 @@ def generateGraphForDay(daysAgo):
 
 
 
-# for u in range(0,30):
-#	print u
-generateGraphForDay(0)
+for u in range(0,30):
+	generateGraphForDay(u)
 
