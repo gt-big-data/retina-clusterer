@@ -12,7 +12,7 @@ sys.setdefaultencoding('utf-8')
 client = MongoClient('mongodb://146.148.59.202:27017/')
 db = client['big_data']
 
-Article = namedtuple('Article', ['title', 'text', 'category', 'clusterDate', 'id', 'keywords', 'img'])
+Article = namedtuple('Article', ['title', 'text', 'category', 'clusterDate', 'id', 'keywords', 'img', 'url'])
 
 def getArticlesByTimeStamp(timeStamp, limit=1000):
     timeObj = datetime.utcfromtimestamp(timeStamp)
@@ -25,7 +25,7 @@ def getArticlesByTimeStamp(timeStamp, limit=1000):
         img = ''
         if article['img'] is not None:
             img = article['img']
-        returnObject.append(Article(article['title'], article['content'], cat, datetime.utcfromtimestamp(article['timestamp']), article['_id'], [], img)) # this is old categories, be careful
+        returnObject.append(Article(article['title'], article['content'], cat, datetime.utcfromtimestamp(article['timestamp']), article['_id'], [], img, article['url'])) # this is old categories, be careful
     return returnObject
 
 def getArticlesInLastNDays(n=10, limit=1000):
@@ -44,7 +44,7 @@ def getArticlesBetweenTimes(time1, time2):
         category = ''
         if 'category' in article:
             category = article['category']
-        clean_articles.append(Article(article['title'], article['content'], category, article['timestamp'], article['_id'], article['keywords'], img))
+        clean_articles.append(Article(article['title'], article['content'], category, article['timestamp'], article['_id'], article['keywords'], img, article['url']))
     return clean_articles
 
 def getCrawlerVersion():
@@ -69,7 +69,7 @@ def getLatestCluster(clusterName, limit = 50, skip=0):
         img = ''
         if 'img' in article:
             img = article['img']
-        clean_articles.append(Article(article['title'], article['text'], clusterName, article['download_time'], article['_id'], article['keywords'], img))
+        clean_articles.append(Article(article['title'], article['text'], clusterName, article['download_time'], article['_id'], article['keywords'], img, ''))
     return clean_articles
 
 def getTrainingSet(limit = 50, skip=0):
@@ -108,7 +108,7 @@ def getArticlesNoKeywords(limit=30):
         category = ''
         if 'category' in article:
             category = article['category']
-        clean_articles.append(Article(article['title'], article['content'], category, article['timestamp'], article['_id'], [], img))
+        clean_articles.append(Article(article['title'], article['content'], category, article['timestamp'], article['_id'], [], img, article['url']))
     return clean_articles
 
 def getLatestCleanArticles(limit=30):
@@ -118,7 +118,7 @@ def getLatestCleanArticles(limit=30):
         img = ''
         if 'img' in article:
             img = article['img']
-        clean_articles.append(Article(article['title'], article['text'], article['category'], article['download_time'], article['_id'], article['keywords'], img))
+        clean_articles.append(Article(article['title'], article['text'], article['category'], article['download_time'], article['_id'], article['keywords'], img, ''))
     return clean_articles
 
 def updateKeywords(articleID, keywords):
