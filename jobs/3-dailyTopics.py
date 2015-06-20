@@ -22,7 +22,7 @@ def generateGraphForDay(daysAgo):
 	for i in range(0, len(articles)-2):
 		for j in range(i+1, len(articles)-1):
 			commonKeywords = list(set(articles[i].keywords).intersection(articles[j].keywords))
-			if len(commonKeywords) > 1:
+			if len(commonKeywords) > 2:
 				edgesClean.append({"source": articles[i].id, "target": articles[j].id, "value": len(commonKeywords)})
 				g.add_edges([(i, j)])
 
