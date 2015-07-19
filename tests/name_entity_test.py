@@ -21,6 +21,6 @@ def getNameEntities(text):
     nameEntity = list(set(nameEntity))
     return nameEntity
 
-articles = app.getLatestCleanArticles(5)
-articleNumber = 2
-print articles[articleNumber][0], "\n\n", getNameEntities(articles[articleNumber][1])
+# articles = app.getLatestCleanArticles(5)
+# articleNumber = 2
+# print articles[articleNumber][0], "\n\n", getNameEntities(articles[articleNumber][1])
