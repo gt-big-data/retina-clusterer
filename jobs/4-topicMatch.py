@@ -15,8 +15,8 @@ class JSONEncoder(json.JSONEncoder):
 			return str(o)
 		return json.JSONEncoder.default(self, o)
 
-def generateGraphForDay(beginTime):
-	endTime = beginTime + 1.5*24*3600
+def generateGraphForDay(endTime):
+	beginTime = endTime - 3*24*3600
 	articles = app.getArticlesBetweenTimes(beginTime, endTime)
 
 	art = db.qdoc.find({'$query': {}, '$orderby': {'topic': -1}}).limit(1)
@@ -64,5 +64,4 @@ def generateGraphForDay(beginTime):
 			newTopic = counter.most_common(1)[0][0]
 		db.qdoc.update({"_id": {'$in': idList}}, {"$set": {"topic": newTopic}}, multi=True)
 
-for i in range(30,90):
-	generateGraphForDay(1432944000+i*86400)
+generateGraphForDay(time.time())
