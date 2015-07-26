@@ -1,5 +1,6 @@
-from ..db import app
-from ..db.app import Article
+from db import app
+from dbco import *
+from article import *
 from time import *
 from datetime import datetime
 import time
@@ -23,14 +24,14 @@ def generateGraphForDay(daysAgo):
 		for j in range(i+1, len(articles)-1):
 			commonKeywords = list(set(articles[i].keywords).intersection(articles[j].keywords))
 			if len(commonKeywords) > 1:
-				edgesClean.append({"source": articles[i].id, "target": articles[j].id, "value": len(commonKeywords)})
+				edgesClean.append({"source": articles[i].guid, "target": articles[j].guid, "value": len(commonKeywords)})
 				g.add_edges([(i, j)])
 
 	coloring = g.community_infomap()
 	memberships = coloring.membership
 
 	for i, membership in zip(range(0,len(articles)-1), memberships):
-		nodesClean.append({"id": articles[i].id, "name": articles[i].title.encode('utf-8').replace('"', ''), "group": str(membership), "keywords": articles[i].keywords[:5], "img": '', 'source': articles[i].source, 'url': articles[i].url})
+		nodesClean.append({"id": articles[i].guid, "name": articles[i].title.encode('utf-8').replace('"', ''), "group": str(membership), "keywords": articles[i].keywords[:5], "img": '', 'source': articles[i].source, 'url': articles[i].url})
 		#articles[i].img
 
 	endDate = datetime.utcfromtimestamp(endTime)
@@ -38,12 +39,7 @@ def generateGraphForDay(daysAgo):
 	time1 = (date1 - datetime(1970,1,1)).total_seconds()
 	time2 = time1 + 86399
 	date2 = datetime.utcfromtimestamp(time2)
-	app.db.graph_topics.update({'$and': [{'date': {'$gte': datetime.utcfromtimestamp(time1)}}, {'date': {'$lte': datetime.utcfromtimestamp(time2)}}]}, {'$set': {'date': datetime.utcfromtimestamp(endTime), 'graph': {'nodes': nodesClean, 'edges': edgesClean}}}, upsert=True)
+	print datetime.utcfromtimestamp(endTime)
+	db.graph_topics.update({'$and': [{'date': {'$gte': datetime.utcfromtimestamp(time1)}}, {'date': {'$lte': datetime.utcfromtimestamp(time2)}}]}, {'$set': {'date': datetime.utcfromtimestamp(endTime), 'graph': {'nodes': nodesClean, 'edges': edgesClean}}}, upsert=True)
 
-
-
-
-u = 0
-#for u in range(0,30):
-generateGraphForDay(u)
-
+generateGraphForDay(0)

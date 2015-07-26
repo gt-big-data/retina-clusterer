@@ -1,5 +1,5 @@
 import app
-from app import Article
+from article import *
 import time
 from collections import defaultdict
 

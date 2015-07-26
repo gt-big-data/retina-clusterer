@@ -1,4 +1,4 @@
-from ..db import app
+from db import app
 import numpy as np
 
 from StringIO import StringIO
@@ -17,7 +17,7 @@ def getKeywords(texts):
 	tfidf_trans2 = TfidfTransformer()
 
 	trainingArticles = app.getTrainingSet(50, 20) # get a training set to mix up the TfIdf
-	trainingText = [x.text for x in trainingArticles]
+	trainingText = [x.content for x in trainingArticles]
 
 	totalText = trainingText + texts # merge
 
@@ -195,8 +195,8 @@ def updateLatestArticles():
 	# Produce a keyword list, and upload to Database
 	articles = app.getArticlesNoKeywords(50)
 
-	articlesTxt = [article.text for article in articles]
-	articlesId = [article.id for article in articles]
+	articlesTxt = [article.content for article in articles]
+	articlesId = [article.guid for article in articles]
 
 	articlesKeywords = getKeywords(articlesTxt)
 
@@ -204,11 +204,6 @@ def updateLatestArticles():
 		app.updateKeywords(articleId, articleKeywords)
 
 updateLatestArticles()
-
-# articles = app.getLatestCluster('Technology', 10, 0)
-# articlesTitle = [article.title for article in articles]
-# articlesTxt = [article.text for article in articles]
-# articlesKeywords = getKeywords(articlesTxt)
 
 # for articleKeywords, articleTitle in zip(articlesKeywords, articlesTitle):
 # 	print articleTitle.encode('utf-8'), "\n ---------------------------------\n", articleKeywords, "\n\n"

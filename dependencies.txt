@@ -13,3 +13,7 @@ numpy==1.9.1
 pymongo==2.7.2
 scikit-learn==0.15.2
 scipy==0.15.0
+
+To run the topic generation:
+
+python-igraph
