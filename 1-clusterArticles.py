@@ -1,17 +1,16 @@
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 import time
-from ..db import app
-from ..article import *
-from ..classification import vectorize
-from ..cluster_name import cluster_name
+from db import app
+from article import *
+from classification import vectorize
+from cluster_name import cluster_name
 from collections import defaultdict
 from sklearn.naive_bayes import MultinomialNB
-from ..supervisedTest import static_classifier_test
+from supervisedTest import static_classifier_test
 from bson.objectid import ObjectId
 from sklearn.svm import SVC
 
 new_articles = app.getArticlesByTimeStamp(time.time() - 4 * 3600) # last four hours
-print len(new_articles)
 unlabeled_articles = [];
 unlabeled_texts = [];
 

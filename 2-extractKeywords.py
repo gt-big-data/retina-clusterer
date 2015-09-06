@@ -1,4 +1,4 @@
-from ..db import app
+from db import app
 import numpy as np
 
 from StringIO import StringIO

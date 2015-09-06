@@ -4,8 +4,8 @@ from bson.objectid import ObjectId
 from collections import namedtuple
 import time, json, sys
 
-from article import *
-from dbco import *
+from ..dbco import *
+from ..article import *
 
 def getArticlesByTimeStamp(timeStamp, limit=1000):
     timeObj = datetime.utcfromtimestamp(timeStamp)
@@ -33,7 +33,7 @@ def getArticleClusterList():
         clusterNameArray.append(cluster)
     return clusterNameArray
 
-def getLatestCluster(clusterName, limit = 50, skip=0):
+def getLatestCluster(clusterName, limit=50, skip=0):
     if limit == 0: # If limit is 0, get ALL articles.
         limit = db.cleanarticles.find({'category': clusterName}).count()
     articles = db.cleanarticles.find({ "$query": { "category":  clusterName }, "$orderby": { 'download_time' : -1 } }).skip(skip).limit(limit)
@@ -42,7 +42,7 @@ def getLatestCluster(clusterName, limit = 50, skip=0):
         clean_articles.append(Article(article['_id'], article['title'], '', 0, '', '', article['text']))
     return clean_articles
 
-def getTrainingSet(limit = 50, skip=0):
+def getTrainingSet(limit=50, skip=0):
     clusterList = getArticleClusterList()
     trainingSet = []
     for cluster in clusterList:
