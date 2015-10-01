@@ -200,7 +200,10 @@ def updateLatestArticles():
 
 	articlesKeywords = getKeywords(articlesTxt)
 
-	for articleKeywords, articleId in zip(articlesKeywords, articlesId):
+	for articleKeywords, articleId, articleTxt in zip(articlesKeywords, articlesId, articlesTxt):
+		print articleKeywords
+		print 'google' in articleTxt
+		print len(articleTxt)
 		app.updateKeywords(articleId, articleKeywords)
 
 updateLatestArticles()

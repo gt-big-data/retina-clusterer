@@ -64,7 +64,7 @@ def generateGraphForDay(endTime):
 			newTopic = counter.most_common(1)[0][0]
 		db.qdoc.update({"_id": {'$in': idList}}, {"$set": {"topic": newTopic}}, multi=True)
 
-#daySpan = 90
+#daySpan = 40
 #startFrom = time.time()-daySpan*86400
 #for i in range(0,daySpan):
 #	generateGraphForDay(startFrom+i*86400)
