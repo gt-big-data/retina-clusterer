@@ -23,6 +23,7 @@ def generateGraphForDay(endTime):
 	
 	maxTopic = art[0]['topic']
 	print maxTopic
+
 	updatedTopics = []
 	edgesClean = []
 	g = Graph()
@@ -64,7 +65,7 @@ def generateGraphForDay(endTime):
 			newTopic = counter.most_common(1)[0][0]
 		updatedTopics.append(newTopic)
 		db.qdoc.update({"_id": {'$in': idList}}, {"$set": {"topic": newTopic}}, multi=True)
-		return updatedTopics
+	return updatedTopics
 
 def updateTopicKeywords(topicIds):
 	keywordsAndTopics = db.qdoc.aggregate([
@@ -98,5 +99,10 @@ def updateTopicKeywords(topicIds):
 	topicUpdate.execute()
 
 if __name__ == '__main__':
+	# days = 15
+	# for d in range(0,days):
+	# 	t = time.time()-(days-d)*86400
+	# 	updatedTopics = generateGraphForDay(t)
+	# 	updateTopicKeywords(updatedTopics)
 	updatedTopics = generateGraphForDay(time.time())
 	updateTopicKeywords(updatedTopics)
