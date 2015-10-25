@@ -24,10 +24,8 @@ def generateGraphForDay(endTime):
 	maxTopic = art[0]['topic']
 	print maxTopic
 
-	updatedTopics = []
-	edgesClean = []
-	g = Graph()
-	g.add_vertices(len(articles))
+	updatedTopics = [];	edgesClean = []
+	g = Graph(); g.add_vertices(len(articles))
 
 	for i in range(0, len(articles)-2):
 		for j in range(i+1, len(articles)-1):
