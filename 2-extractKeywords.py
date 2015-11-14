@@ -1,10 +1,11 @@
-from db import app
-import numpy as np
-
-from StringIO import StringIO
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
 from nltk.stem.porter import PorterStemmer
+from StringIO import StringIO
+import numpy as np
+from dbco import *
+from db import app
+
 
 def getKeywords(texts):
 	# Given a list of texts, will extract the keywords for each and return that!
@@ -193,16 +194,20 @@ def getKeywords(texts):
 def updateLatestArticles():
 	# This will get the latest 30 articles without keywords
 	# Produce a keyword list, and upload to Database
-	articles = app.getArticlesNoKeywords(50)
-	print len(articles)
+	articles = list(db.qdoc.find({'keywords': {'$exists': False}}).sort('timestamp', -1).limit(50))
 
-	articlesTxt = [article.content for article in articles]
-	articlesId = [article.guid for article in articles]
+	print db.qdoc.find({'keywords': {'$exists': False}}).count()
+
+	articlesTxt = [a['content'] for a in articles]
+	articlesId = [a['_id'] for a in articles]
 
 	articlesKeywords = getKeywords(articlesTxt)
 
-	for articleKeywords, articleId, articleTxt in zip(articlesKeywords, articlesId, articlesTxt):
-		app.updateKeywords(articleId, articleKeywords)
+	qdocUpdate = db.qdoc.initialize_unordered_bulk_op()
+	for artId, kw in zip(articlesId, articlesKeywords):
+		qdocUpdate.find({'_id': artId}).upsert().update({'$set': {'keywords': kw}})
+
+	qdocUpdate.execute()
 
 updateLatestArticles()
 

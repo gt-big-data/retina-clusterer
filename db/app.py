@@ -4,8 +4,8 @@ from bson.objectid import ObjectId
 from collections import namedtuple
 import time, json, sys
 
-from ..dbco import *
-from ..article import *
+from dbco import *
+from article import *
 
 def getArticlesByTimeStamp(timeStamp, limit=1000):
     timeObj = datetime.utcfromtimestamp(timeStamp)
