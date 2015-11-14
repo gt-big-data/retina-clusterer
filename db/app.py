@@ -53,7 +53,7 @@ def getTrainingSet(limit=50, skip=0):
     return trainingSet
 
 def getArticlesNoKeywords(limit=30):
-    articles = db.qdoc.find({ "$query": { "keywords":  [] }, "$orderby": { 'timestamp' : -1 } }).limit(limit)
+    articles = db.qdoc.find({ "$query": {'$or': [{"keywords":  []}, {"keywords":  {'$exists': False}}] }, "$orderby": { 'timestamp' : -1 } }).limit(limit)
     return buildArticleArray(articles)
 
 def updateKeywords(articleID, keywords):

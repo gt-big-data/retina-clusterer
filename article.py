@@ -21,6 +21,8 @@ def buildArticleArray(articles):
 			topic = 0
 			if 'topic' in article:
 				topic = article['topic']
+			if 'keywords' not in article:
+				article['keywords'] = []
 			a = Article(article['_id'], article['title'], article['url'], article['timestamp'], article['source'], article['feed'], article['content'], img, article['keywords'], topic)
 			if isValid(a):
 				articleArray.append(a)

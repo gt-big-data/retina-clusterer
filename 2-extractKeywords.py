@@ -194,6 +194,7 @@ def updateLatestArticles():
 	# This will get the latest 30 articles without keywords
 	# Produce a keyword list, and upload to Database
 	articles = app.getArticlesNoKeywords(50)
+	print len(articles)
 
 	articlesTxt = [article.content for article in articles]
 	articlesId = [article.guid for article in articles]
