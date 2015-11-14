@@ -97,10 +97,10 @@ def updateTopicKeywords(topicIds):
 	topicUpdate.execute()
 
 if __name__ == '__main__':
-	# days = 15
-	# for d in range(0,days):
-	# 	t = time.time()-(days-d)*86400
-	# 	updatedTopics = generateGraphForDay(t)
-	# 	updateTopicKeywords(updatedTopics)
+#	days = 3
+#	for d in range(0,days):
+#		t = time.time()-(days-d)*86400
+#		updatedTopics = generateGraphForDay(t)
+#		updateTopicKeywords(updatedTopics)
 	updatedTopics = generateGraphForDay(time.time())
 	updateTopicKeywords(updatedTopics)
