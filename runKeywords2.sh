@@ -1,7 +1,7 @@
 #!/bin/bash
-cd /home/clusterer
+cd /home/clusterer/retina-clusterer
 while true
 do
-python -m retina-clusterer.2-extractKeywords && echo $(date) >> keywordSuccess.log
+python 2-extractKeywords.py && echo $(date) >> keywordSuccess.log
 sleep 1
 done
