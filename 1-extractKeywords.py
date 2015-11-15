@@ -16,7 +16,7 @@ def getKeywords(texts):
 	tfidf_trans2 = TfidfTransformer()
 
 	thirtyDays = time.time()-30*24*60*60
-	trainingArticles = db.qdoc.find({'timestamp': {'$lte': thirtyDays}}).sort({'timestamp': -1}).limit(500)
+	trainingArticles = list(db.qdoc.find({'timestamp': {'$lte': thirtyDays}}).sort('timestamp', -1).limit(500))
 
 	trainingText = [x['content'] for x in trainingArticles]
 
@@ -194,9 +194,8 @@ def getKeywords(texts):
 def updateLatestArticles():
 	# This will get the latest 30 articles without keywords
 	# Produce a keyword list, and upload to Database
-	articles = list(db.qdoc.find({'keywords': {'$exists': False}}).sort('timestamp', -1).limit(50))
-
-	print db.qdoc.find({'keywords': {'$exists': False}}).count()
+	articles = list(db.qdoc.find({'keywords': []}).sort('timestamp', -1).limit(50))
+	print len(articles)
 
 	articlesTxt = [a['content'] for a in articles]
 	articlesId = [a['_id'] for a in articles]
@@ -204,10 +203,16 @@ def updateLatestArticles():
 	articlesKeywords = getKeywords(articlesTxt)
 
 	qdocUpdate = db.qdoc.initialize_unordered_bulk_op()
+	toUpdate = 0
 	for artId, kw in zip(articlesId, articlesKeywords):
+		toUpdate += 1
+		if len(kw) == 0:
+			kw = ['']
+		print kw
 		qdocUpdate.find({'_id': artId}).upsert().update({'$set': {'keywords': kw}})
 
-	qdocUpdate.execute()
+	if toUpdate >0:
+		qdocUpdate.execute()
 
 updateLatestArticles()
 
