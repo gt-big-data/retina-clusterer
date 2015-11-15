@@ -1,11 +1,9 @@
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.feature_extraction.text import TfidfTransformer
+from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from nltk.stem.porter import PorterStemmer
 from StringIO import StringIO
 import numpy as np
 from dbco import *
-from db import app
-
+import time
 
 def getKeywords(texts):
 	# Given a list of texts, will extract the keywords for each and return that!
@@ -17,8 +15,10 @@ def getKeywords(texts):
 	tfidf_trans1 = TfidfTransformer()
 	tfidf_trans2 = TfidfTransformer()
 
-	trainingArticles = app.getTrainingSet(50, 20) # get a training set to mix up the TfIdf
-	trainingText = [x.content for x in trainingArticles]
+	thirtyDays = time.time()-30*24*60*60
+	trainingArticles = db.qdoc.find({'timestamp': {'$lte': thirtyDays}}).sort({'timestamp': -1}).limit(500)
+
+	trainingText = [x['content'] for x in trainingArticles]
 
 	totalText = trainingText + texts # merge
 
