@@ -1,13 +1,11 @@
-from db import app
 from bson.objectid import ObjectId
-from article import *
-from time import *
-import time
+from collections import Counter
 from datetime import datetime
 from dateutil import tz
-
-from collections import Counter
 from igraph import *
+from dbco import *
+from time import *
+import time, json
 
 class JSONEncoder(json.JSONEncoder):
 	def default(self, o):
@@ -17,7 +15,7 @@ class JSONEncoder(json.JSONEncoder):
 
 def generateGraphForDay(endTime):
 	beginTime = endTime - 3*24*3600
-	articles = app.getArticlesBetweenTimes(beginTime, endTime)
+	articles = list(db.qdoc.find({'timestamp': {'$gte': beginTime, '$lte': endTime}}))
 
 	art = db.qdoc.find({'$query': {}, '$orderby': {'topic': -1}}).limit(1)
 	
@@ -29,9 +27,9 @@ def generateGraphForDay(endTime):
 
 	for i in range(0, len(articles)-2):
 		for j in range(i+1, len(articles)-1):
-			commonKeywords = list(set(articles[i].keywords).intersection(articles[j].keywords))
+			commonKeywords = list(set(articles[i]['keywords']).intersection(articles[j]['keywords']))
 			if len(commonKeywords) > 2:
-				edgesClean.append({"source": articles[i].guid, "target": articles[j].guid, "value": len(commonKeywords)})
+				edgesClean.append({"source": articles[i]['_id'], "target": articles[j]['_id'], "value": len(commonKeywords)})
 				g.add_edges([(i, j)])
 
 	coloring = g.community_infomap()
@@ -42,14 +40,14 @@ def generateGraphForDay(endTime):
 
 	oldTopics = []
 	for i, membership in zip(range(0,len(articles)-1), memberships):
-		oldTopics.append(articles[i].topic)
+		oldTopics.append(articles[i].get('topic', 0))
 
 	for bigComm in bigCommList:
 		oldTopicList = []
 		idList = []
 		for i, membership, oldTopic in zip(range(0,len(articles)-1), memberships, oldTopics):
 			if membership == bigComm:
-				idList.append(articles[i].guid)
+				idList.append(articles[i]['_id'])
 				oldTopicList.append(oldTopic)
 
 		newTopic = 0
