@@ -1,10 +1,9 @@
-from db import app
-import numpy as np
-
-from StringIO import StringIO
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.feature_extraction.text import TfidfTransformer
+from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from nltk.stem.porter import PorterStemmer
+from StringIO import StringIO
+import numpy as np
+from dbco import *
+import time
 
 def getKeywords(texts):
 	# Given a list of texts, will extract the keywords for each and return that!
@@ -16,8 +15,10 @@ def getKeywords(texts):
 	tfidf_trans1 = TfidfTransformer()
 	tfidf_trans2 = TfidfTransformer()
 
-	trainingArticles = app.getTrainingSet(50, 20) # get a training set to mix up the TfIdf
-	trainingText = [x.content for x in trainingArticles]
+	thirtyDays = time.time()-30*24*60*60
+	trainingArticles = list(db.qdoc.find({'timestamp': {'$lte': thirtyDays}}).sort('timestamp', -1).limit(500))
+
+	trainingText = [x['content'] for x in trainingArticles]
 
 	totalText = trainingText + texts # merge
 
@@ -193,17 +194,28 @@ def getKeywords(texts):
 def updateLatestArticles():
 	# This will get the latest 30 articles without keywords
 	# Produce a keyword list, and upload to Database
-	articles = app.getArticlesNoKeywords(50)
+	articles = list(db.qdoc.find({'keywords': []}).sort('timestamp', -1).limit(50))
+	print len(articles)
 
-	articlesTxt = [article.content for article in articles]
-	articlesId = [article.guid for article in articles]
+	articlesTxt = [a['content'] for a in articles]
+	articlesId = [a['_id'] for a in articles]
 
 	articlesKeywords = getKeywords(articlesTxt)
 
-	for articleKeywords, articleId, articleTxt in zip(articlesKeywords, articlesId, articlesTxt):
-		app.updateKeywords(articleId, articleKeywords)
+	qdocUpdate = db.qdoc.initialize_unordered_bulk_op()
+	toUpdate = 0
+	for artId, kw in zip(articlesId, articlesKeywords):
+		toUpdate += 1
+		if len(kw) == 0:
+			kw = ['']
+		print kw
+		qdocUpdate.find({'_id': artId}).upsert().update({'$set': {'keywords': kw}})
+
+	if toUpdate >0:
+		qdocUpdate.execute()
 
 updateLatestArticles()
 
 # for articleKeywords, articleTitle in zip(articlesKeywords, articlesTitle):
 # 	print articleTitle.encode('utf-8'), "\n ---------------------------------\n", articleKeywords, "\n\n"
+

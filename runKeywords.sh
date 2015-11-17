@@ -1,4 +1,4 @@
 #!/bin/bash
-cd /home/clusterer
+cd /home/clusterer/retina-clusterer
 echo $(date) >> keywordRuns.log
-python -m retina-clusterer.2-extractKeywords && echo $(date) >> keywordSuccess.log
+python 1-extractKeywords.py && echo $(date) >> keywordSuccess.log
