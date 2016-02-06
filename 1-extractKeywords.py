@@ -190,9 +190,8 @@ def getKeywords(texts):
 		articleIndex = articleIndex + 1
 	return keywordList
 
-
 def updateLatestArticles():
-	# This will get the latest 30 articles without keywords
+	# This will get the latest 50 articles without keywords
 	# Produce a keyword list, and upload to Database
 	count = db.qdoc.find({'$or': [{'keywords': {'$exists': False}}, {'keywords': []}]}).count()
 	print count
@@ -211,13 +210,10 @@ def updateLatestArticles():
 			toUpdate += 1
 			if len(kw) == 0:
 				kw = ['']
-			print kw
 			qdocUpdate.find({'_id': artId}).upsert().update({'$set': {'keywords': kw}})
 
 		if toUpdate >0:
 			qdocUpdate.execute()
 
-updateLatestArticles()
-
-# for articleKeywords, articleTitle in zip(articlesKeywords, articlesTitle):
-# 	print articleTitle.encode('utf-8'), "\n ---------------------------------\n", articleKeywords, "\n\n"
+if __name__ == '__main__':
+	updateLatestArticles()
