@@ -194,28 +194,30 @@ def getKeywords(texts):
 def updateLatestArticles():
 	# This will get the latest 30 articles without keywords
 	# Produce a keyword list, and upload to Database
-	articles = list(db.qdoc.find({'keywords': []}).sort('timestamp', -1).limit(50))
-	print len(articles)
+	count = db.qdoc.find({'$or': [{'keywords': {'$exists': False}}, {'keywords': []}]}).count()
+	print count
+	pages = int(count/50.0)
+	for iii in range(min(20,pages)):
+		articles = list(db.qdoc.find({'$or': [{'keywords': {'$exists': False}}, {'keywords': []}]}).sort('timestamp', -1).limit(50))
+		print len(articles)
 
-	articlesTxt = [a['content'] for a in articles]
-	articlesId = [a['_id'] for a in articles]
+		articlesTxt = [a['content'] for a in articles]
+		articlesId = [a['_id'] for a in articles]
 
-	articlesKeywords = getKeywords(articlesTxt)
+		articlesKeywords = getKeywords(articlesTxt)
+		qdocUpdate = db.qdoc.initialize_unordered_bulk_op()
+		toUpdate = 0
+		for artId, kw in zip(articlesId, articlesKeywords):
+			toUpdate += 1
+			if len(kw) == 0:
+				kw = ['']
+			print kw
+			qdocUpdate.find({'_id': artId}).upsert().update({'$set': {'keywords': kw}})
 
-	qdocUpdate = db.qdoc.initialize_unordered_bulk_op()
-	toUpdate = 0
-	for artId, kw in zip(articlesId, articlesKeywords):
-		toUpdate += 1
-		if len(kw) == 0:
-			kw = ['']
-		print kw
-		qdocUpdate.find({'_id': artId}).upsert().update({'$set': {'keywords': kw}})
-
-	if toUpdate >0:
-		qdocUpdate.execute()
+		if toUpdate >0:
+			qdocUpdate.execute()
 
 updateLatestArticles()
 
 # for articleKeywords, articleTitle in zip(articlesKeywords, articlesTitle):
 # 	print articleTitle.encode('utf-8'), "\n ---------------------------------\n", articleKeywords, "\n\n"
-
