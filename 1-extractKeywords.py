@@ -195,7 +195,7 @@ def updateLatestArticles():
 	# Produce a keyword list, and upload to Database
 	count = db.qdoc.find({'$or': [{'keywords': {'$exists': False}}, {'keywords': []}]}).count()
 	print count
-	pages = int(count/50.0)
+	pages = int(count/50.0)+1
 	for iii in range(min(20,pages)):
 		articles = list(db.qdoc.find({'$or': [{'keywords': {'$exists': False}}, {'keywords': []}]}).sort('timestamp', -1).limit(50))
 		print len(articles)
