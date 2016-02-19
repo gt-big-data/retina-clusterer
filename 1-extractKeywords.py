@@ -3,7 +3,7 @@ from nltk.stem.porter import PorterStemmer
 from StringIO import StringIO
 import numpy as np
 from dbco import *
-import time
+import datetime
 
 def getKeywords(texts):
 	# Given a list of texts, will extract the keywords for each and return that!
@@ -15,7 +15,7 @@ def getKeywords(texts):
 	tfidf_trans1 = TfidfTransformer()
 	tfidf_trans2 = TfidfTransformer()
 
-	thirtyDays = time.time()-30*24*60*60
+	thirtyDays = datetime.datetime.now()-datetime.timedelta(days=30)
 	trainingArticles = list(db.qdoc.find({'timestamp': {'$lte': thirtyDays}}).sort('timestamp', -1).limit(500))
 
 	trainingText = [x['content'] for x in trainingArticles]

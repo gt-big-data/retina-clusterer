@@ -2,8 +2,7 @@ from bson.objectid import ObjectId
 from collections import Counter
 from igraph import *
 from dbco import *
-from time import *
-import time, json
+import datetime, json
 
 class JSONEncoder(json.JSONEncoder):
 	def default(self, o):
@@ -12,9 +11,11 @@ class JSONEncoder(json.JSONEncoder):
 		return json.JSONEncoder.default(self, o)
 
 def generateGraphForDay(endTime):
-	beginTime = endTime - 3*24*3600
+
+	beginTime = endTime - datetime.timedelta(days=3)
 	articles = list(db.qdoc.find({'timestamp': {'$gte': beginTime, '$lte': endTime}}))
 
+	print len(articles)
 	art = db.qdoc.find({'$query': {}, '$orderby': {'topic': -1}}).limit(1)
 	
 	maxTopic = art[0]['topic']
@@ -98,5 +99,5 @@ if __name__ == '__main__':
 #		t = time.time()-(days-d)*86400
 #		updatedTopics = generateGraphForDay(t)
 #		updateTopicKeywords(updatedTopics)
-	updatedTopics = generateGraphForDay(time.time())
+	updatedTopics = generateGraphForDay(datetime.datetime.now())
 	updateTopicKeywords(updatedTopics)
