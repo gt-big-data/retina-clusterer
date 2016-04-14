@@ -35,7 +35,7 @@ def generateGraphForDay(endTime):
 	memberships = coloring.membership
 
 	memberCounts = Counter(memberships)
-	bigCommList = [k for k,v in memberCounts.iteritems() if v>=3]
+	bigCommList = [k for k, v in memberCounts.iteritems() if v>=3]
 
 	oldTopics = []
 	for i, membership in zip(range(0,len(articles)-1), memberships):
