@@ -40,5 +40,3 @@ if __name__ == '__main__':
 	for b in buckets:
 		buck = buckets[b]
 		text = "\n".join([a['content'] for a in buck])
-
-
